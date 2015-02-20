@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */; };
 		D37F1F9B1A8D993D00952ADF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1F9A1A8D993D00952ADF /* main.m */; };
 		D37F1F9E1A8D993D00952ADF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1F9D1A8D993D00952ADF /* AppDelegate.m */; };
 		D37F1FA11A8D993D00952ADF /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FA01A8D993D00952ADF /* GameScene.m */; };
@@ -15,7 +16,13 @@
 		D37F1FA91A8D993D00952ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37F1FA71A8D993D00952ADF /* Main.storyboard */; };
 		D37F1FAB1A8D993D00952ADF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37F1FAA1A8D993D00952ADF /* Images.xcassets */; };
 		D37F1FAE1A8D993D00952ADF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D37F1FAC1A8D993D00952ADF /* LaunchScreen.xib */; };
-		D37F1FBA1A8D993D00952ADF /* GridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FB91A8D993D00952ADF /* GridTests.m */; };
+		D37F1FBA1A8D993D00952ADF /* FaceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FB91A8D993D00952ADF /* FaceTests.m */; };
+		D37F1FC61A8D998C00952ADF /* BBSquareGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FC51A8D998C00952ADF /* BBSquareGrid.m */; };
+		D37F1FC91A8D999C00952ADF /* BBFace.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FC81A8D999C00952ADF /* BBFace.m */; };
+		D37F1FCC1A8D99A400952ADF /* BBEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FCB1A8D99A400952ADF /* BBEdge.m */; };
+		D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FCE1A8D99AC00952ADF /* BBVertex.m */; };
+		D37F1FD21A8E356800952ADF /* BBSquareGridController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD11A8E356800952ADF /* BBSquareGridController.m */; };
+		D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD31A8EDC6000952ADF /* EdgeTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryTreeMazeGenerator.h; sourceTree = "<group>"; };
+		D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinaryTreeMazeGenerator.m; sourceTree = "<group>"; };
 		D37F1F951A8D993D00952ADF /* Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37F1F991A8D993D00952ADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D37F1F9A1A8D993D00952ADF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -44,7 +53,18 @@
 		D37F1FAD1A8D993D00952ADF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D37F1FB31A8D993D00952ADF /* GridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37F1FB81A8D993D00952ADF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D37F1FB91A8D993D00952ADF /* GridTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GridTests.m; sourceTree = "<group>"; };
+		D37F1FB91A8D993D00952ADF /* FaceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FaceTests.m; sourceTree = "<group>"; };
+		D37F1FC41A8D998C00952ADF /* BBSquareGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSquareGrid.h; sourceTree = "<group>"; };
+		D37F1FC51A8D998C00952ADF /* BBSquareGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSquareGrid.m; sourceTree = "<group>"; };
+		D37F1FC71A8D999C00952ADF /* BBFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBFace.h; sourceTree = "<group>"; };
+		D37F1FC81A8D999C00952ADF /* BBFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBFace.m; sourceTree = "<group>"; };
+		D37F1FCA1A8D99A400952ADF /* BBEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBEdge.h; sourceTree = "<group>"; };
+		D37F1FCB1A8D99A400952ADF /* BBEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBEdge.m; sourceTree = "<group>"; };
+		D37F1FCD1A8D99AC00952ADF /* BBVertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBVertex.h; sourceTree = "<group>"; };
+		D37F1FCE1A8D99AC00952ADF /* BBVertex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBVertex.m; sourceTree = "<group>"; };
+		D37F1FD01A8E356800952ADF /* BBSquareGridController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSquareGridController.h; sourceTree = "<group>"; };
+		D37F1FD11A8E356800952ADF /* BBSquareGridController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSquareGridController.m; sourceTree = "<group>"; };
+		D37F1FD31A8EDC6000952ADF /* EdgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdgeTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,10 +106,15 @@
 		D37F1F971A8D993D00952ADF /* Grid */ = {
 			isa = PBXGroup;
 			children = (
+				D37F1FC31A8D996000952ADF /* Grid Model */,
 				D37F1F9C1A8D993D00952ADF /* AppDelegate.h */,
 				D37F1F9D1A8D993D00952ADF /* AppDelegate.m */,
 				D37F1F9F1A8D993D00952ADF /* GameScene.h */,
 				D37F1FA01A8D993D00952ADF /* GameScene.m */,
+				D37F1FD01A8E356800952ADF /* BBSquareGridController.h */,
+				D37F1FD11A8E356800952ADF /* BBSquareGridController.m */,
+				D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */,
+				D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */,
 				D37F1FA21A8D993D00952ADF /* GameScene.sks */,
 				D37F1FA41A8D993D00952ADF /* GameViewController.h */,
 				D37F1FA51A8D993D00952ADF /* GameViewController.m */,
@@ -113,7 +138,8 @@
 		D37F1FB61A8D993D00952ADF /* GridTests */ = {
 			isa = PBXGroup;
 			children = (
-				D37F1FB91A8D993D00952ADF /* GridTests.m */,
+				D37F1FB91A8D993D00952ADF /* FaceTests.m */,
+				D37F1FD31A8EDC6000952ADF /* EdgeTests.m */,
 				D37F1FB71A8D993D00952ADF /* Supporting Files */,
 			);
 			path = GridTests;
@@ -125,6 +151,21 @@
 				D37F1FB81A8D993D00952ADF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D37F1FC31A8D996000952ADF /* Grid Model */ = {
+			isa = PBXGroup;
+			children = (
+				D37F1FC41A8D998C00952ADF /* BBSquareGrid.h */,
+				D37F1FC51A8D998C00952ADF /* BBSquareGrid.m */,
+				D37F1FC71A8D999C00952ADF /* BBFace.h */,
+				D37F1FC81A8D999C00952ADF /* BBFace.m */,
+				D37F1FCA1A8D99A400952ADF /* BBEdge.h */,
+				D37F1FCB1A8D99A400952ADF /* BBEdge.m */,
+				D37F1FCD1A8D99AC00952ADF /* BBVertex.h */,
+				D37F1FCE1A8D99AC00952ADF /* BBVertex.m */,
+			);
+			name = "Grid Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,10 +269,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D37F1FC91A8D999C00952ADF /* BBFace.m in Sources */,
+				D37F1FD21A8E356800952ADF /* BBSquareGridController.m in Sources */,
+				D37F1FCC1A8D99A400952ADF /* BBEdge.m in Sources */,
 				D37F1FA61A8D993D00952ADF /* GameViewController.m in Sources */,
+				D37F1FC61A8D998C00952ADF /* BBSquareGrid.m in Sources */,
 				D37F1F9E1A8D993D00952ADF /* AppDelegate.m in Sources */,
 				D37F1FA11A8D993D00952ADF /* GameScene.m in Sources */,
+				D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */,
 				D37F1F9B1A8D993D00952ADF /* main.m in Sources */,
+				D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,7 +286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D37F1FBA1A8D993D00952ADF /* GridTests.m in Sources */,
+				D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */,
+				D37F1FBA1A8D993D00952ADF /* FaceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +470,7 @@
 				D37F1FBF1A8D993D00952ADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D37F1FC01A8D993D00952ADF /* Build configuration list for PBXNativeTarget "GridTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +479,7 @@
 				D37F1FC21A8D993D00952ADF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

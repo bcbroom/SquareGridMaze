@@ -1,0 +1,193 @@
+//
+//  BBGrid.m
+//  Grid
+//
+//  Created by Brian Broom on 2/12/15.
+//  Copyright (c) 2015 Brian Broom. All rights reserved.
+//
+
+#import "BBSquareGrid.h"
+#import "BBFace.h"
+#import "BBEdge.h"
+#import "BBVertex.h"
+
+@interface BBSquareGrid ()
+
+@property (strong, nonatomic) NSMutableArray *faces;
+@property (strong, nonatomic) NSMutableArray *edges;
+@property (strong, nonatomic) NSMutableArray *vertices;
+
+@end
+
+@implementation BBSquareGrid
+
+- (instancetype)init {
+    return [self initWithWidth:3 andHeight:4];
+}
+
+- (instancetype)initWithWidth:(NSInteger)width andHeight:(NSInteger)height {
+    self = [super init];
+    if (self) {
+        _height = height;
+        _width = width;
+        
+        [self buildDataStructures];
+        
+        [self addFaces];
+        [self buildFaceConnections];
+        
+        [self addEdges];
+        [self buildEdgeConnections];
+        
+        [self addVertices];
+        [self buildVertexConnections];
+    }
+    return self;
+}
+
+- (void)buildDataStructures {
+    _faces = [NSMutableArray new];
+    for (int i = 0; i < _width; i++) {
+        [_faces addObject:[NSMutableArray new]];
+    }
+    
+    _edges = [NSMutableArray new];
+    // +1 to both dimensions since the outside E,N edges are
+    // technically in the next cell, outside the face bounds
+    for (int i = 0; i < _width + 1; i++) {
+        [_edges addObject:[NSMutableArray new]];
+        
+        for (int j = 0; j < _height + 1; j++) {
+            _edges[i][j] = [NSMutableDictionary new];
+        }
+    }
+    
+    _vertices = [NSMutableArray new];
+}
+
+#pragma mark Faces
+
+- (void)addFaces {
+    for (NSInteger i = 0; i < self.width ; i++) {
+        for (NSInteger j = 0; j < self.height; j++) {
+            BBFace *face = [[BBFace alloc] initWithColumn:i andRow:j];
+            self.faces[i][j] = face;
+        }
+    }
+}
+
+- (void)buildFaceConnections {
+    for (NSInteger i = 0; i < self.width ; i++) {
+        for (NSInteger j = 0; j < self.height; j++) {
+            BBFace *face = [self faceForColumn:i andRow:j];
+            
+            if (i > 0) {
+                face.westFace = [self faceForColumn:(i-1) andRow:j];
+                [face.neighbors addObject:face.westFace];
+            }
+            
+            if (j > 0) {
+                face.southFace = [self faceForColumn:i andRow:(j-1)];
+                [face.neighbors addObject:face.southFace];
+            }
+            
+            if (j < self.height - 1) {
+                face.northFace = [self faceForColumn:i andRow:(j+1)];
+                [face.neighbors addObject:face.northFace];
+            }
+            
+            if (i < self.width - 1) {
+                face.eastFace = [self faceForColumn:(i+1) andRow:j];
+                [face.neighbors addObject:face.eastFace];
+            }
+        }
+    }
+}
+
+- (BBFace *)faceForColumn:(NSInteger)column andRow:(NSInteger)row {
+    return self.faces[column][row];
+}
+
+- (NSArray *)allFaces {
+    NSMutableArray *allFaces = [NSMutableArray new];
+    
+    for (NSMutableArray *column in self.faces) {
+        [allFaces addObjectsFromArray:column];
+    }
+    
+    return allFaces;
+}
+
+#pragma mark Edges
+
+- (void)addEdges {
+    for (int i = 0; i < _width; i++) {
+        for (int j = 0; j < _height; j++) {
+            BBEdge *sEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"S"];
+            _edges[i][j][@"S"] = sEdge;
+            
+            BBEdge *wEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"W"];
+            _edges[i][j][@"W"] = wEdge;
+        }
+    }
+    
+    // add top edges, which are S edges for the face just beyond grid edge
+    for (int i = 0; i < _width; i++) {
+        BBEdge *topEdge = [BBEdge edgeWithColumn:i andRow:_height andSide:@"S"];
+        _edges[i][_height][@"S"] = topEdge;
+    }
+    
+    // add right edges, similarly, but these are W edges
+    for (int j = 0; j < _height; j++) {
+        BBEdge *rightEdge = [BBEdge edgeWithColumn:_width andRow:j andSide:@"W"];
+        _edges[_width][j][@"W"] = rightEdge;
+    }
+}
+
+- (void)buildEdgeConnections {
+    for (BBFace *face in [self allFaces]) {
+        face.westEdge = [self edgeForColumn:face.column andRow:face.row andSide:@"W"];
+        face.southEdge = [self edgeForColumn:face.column andRow:face.row andSide:@"S"];
+        face.eastEdge = [self edgeForColumn:face.column+1 andRow:face.row andSide:@"W"];
+        face.northEdge = [self edgeForColumn:face.column andRow:face.row+1 andSide:@"S"];
+        
+        [face.edges addObjectsFromArray:@[face.westEdge, face.southEdge, face.eastEdge, face.northEdge]];
+    }
+}
+
+- (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
+    return self.edges[column][row][side];
+}
+
+- (NSArray *)allEdges {
+    NSMutableArray *allEdges = [NSMutableArray new];
+    
+    for (NSMutableArray *row in self.edges) {
+        for (NSMutableDictionary *dict in row) {
+            [allEdges addObjectsFromArray:dict.allValues];
+        }
+    }
+    
+    return allEdges;
+}
+
+#pragma mark Vertices
+
+- (void)addVertices {
+    
+}
+
+- (void)buildVertexConnections {
+    
+}
+
+- (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row {
+    return [BBVertex new];
+}
+
+- (NSMutableArray *)allVertices {
+    return self.vertices;
+}
+
+
+@end
