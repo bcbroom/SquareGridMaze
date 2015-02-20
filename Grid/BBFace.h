@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableArray *edges;
 @property (strong, nonatomic) NSMutableArray *vertices;
 
+// TODO: should all these references be weak??
+
 @property (strong, nonatomic) BBFace *northFace;
 @property (strong, nonatomic) BBFace *eastFace;
 @property (strong, nonatomic) BBFace *southFace;

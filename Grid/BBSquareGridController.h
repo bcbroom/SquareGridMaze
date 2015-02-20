@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @class UIImage;
 @class SKSpriteNode;
+
+@class BBFace;
+@class BBEdge;
+@class BBVertex;
 
 @interface BBSquareGridController : NSObject
 
@@ -21,6 +26,9 @@
 - (instancetype)initWithGridOfWidth:(NSInteger)width andHeight:(NSInteger)height;
 
 - (UIImage *)renderGrid;
+
+- (CGPoint)pointForFaceCenter:(BBFace *)face;
+
 - (void)setupPlayer:(SKSpriteNode *)player;
 
 - (void)playerMoveNorth;

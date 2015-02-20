@@ -44,6 +44,7 @@
     
     // hack
     // TODO: move to a propper resetting method
+    // propper way is to reset all the edges isSolid to NO, and rebuild
     if (_player) {
         _startFace = [_grid faceForColumn:0 andRow:0];
         _playerFace = _startFace;
@@ -62,9 +63,6 @@
     self.player = player;
     self.playerFace = [self.grid faceForColumn:0 andRow:0];
     
-    // player uses SK coordinates, ref from bottom left corner of bg image
-//    player.position = CGPointMake(self.playerFace.row * self.faceHeight + self.faceHeight/2 + self.padding,
-//                                  self.playerFace.column * self.faceWidth + self.faceWidth/2 + self.padding);
     [self updatePlayerPosition];
 }
 
@@ -98,9 +96,7 @@
         return;
     }
     
-    BBEdge *sharedEdge = [self commonEdgeBetweenFace:self.playerFace andFace:self.playerFace.southFace];
-    
-    if (!sharedEdge.isSolid) {
+    if (!self.playerFace.southEdge.isSolid) {
         self.playerFace = self.playerFace.southFace;
         [self updatePlayerPosition];
     } else {
@@ -114,9 +110,7 @@
         return;
     }
     
-    BBEdge *sharedEdge = [self commonEdgeBetweenFace:self.playerFace andFace:self.playerFace.eastFace];
-    
-    if (!sharedEdge.isSolid) {
+    if (!self.playerFace.eastEdge.isSolid) {
         self.playerFace = self.playerFace.eastFace;
         [self updatePlayerPosition];
     } else {
@@ -130,9 +124,7 @@
         return;
     }
     
-    BBEdge *sharedEdge = [self commonEdgeBetweenFace:self.playerFace andFace:self.playerFace.westFace];
-    
-    if (!sharedEdge.isSolid) {
+    if (!self.playerFace.westEdge.isSolid) {
         self.playerFace = self.playerFace.westFace;
         [self updatePlayerPosition];
     } else {
@@ -140,21 +132,8 @@
     }
 }
 
-- (BBEdge *)commonEdgeBetweenFace:(BBFace *)one andFace:(BBFace *)two {
-    // temporary hack - find edge joining playerFace and northFace
-    NSMutableSet *playerFaceEdges = [NSMutableSet setWithArray:one.edges];
-    NSMutableSet *northFaceEdges = [NSMutableSet setWithArray:two.edges];
-    [playerFaceEdges intersectSet:northFaceEdges];
-    
-    if (playerFaceEdges.count != 1) {
-        NSLog(@"Error - no common edges found!");
-    }
-    return (BBEdge *)[playerFaceEdges anyObject];
-}
-
 - (void)updatePlayerPosition {
-    CGPoint newPosition = CGPointMake(self.playerFace.column * self.faceWidth + self.faceWidth/2 + self.padding,
-                                      self.playerFace.row * self.faceHeight + self.faceHeight/2 + self.padding);
+    CGPoint newPosition = [self pointForFaceCenter:self.playerFace];
     SKAction *animateMove = [SKAction moveTo:newPosition duration:0.25];
     [self.player runAction:animateMove completion:^{
         [self checkSolved];
@@ -169,6 +148,11 @@
         
         [(GameScene *)self.player.scene youWin];
     }
+}
+
+- (CGPoint)pointForFaceCenter:(BBFace *)face {
+    return CGPointMake(face.column * self.faceWidth + self.faceWidth/2 + self.padding,
+                face.row * self.faceHeight + self.faceHeight/2 + self.padding);
 }
 
 - (UIImage *)renderGrid {
