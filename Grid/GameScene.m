@@ -9,6 +9,8 @@
 #import "GameScene.h"
 #import "BBSquareGridController.h"
 
+#import "BBSquareGrid.h"
+#import "BinaryTreeMazeGenerator.h"
 
 @interface GameScene ()
 
@@ -19,6 +21,15 @@
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipeRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipeRecognizer;
 
+@property (strong, nonatomic) BBSquareGrid *grid;
+
+@property (strong, nonatomic) SKSpriteNode *player;
+
+@property (strong, nonatomic) BBFace *playerFace;
+
+@property (strong, nonatomic) BBFace *startFace;
+@property (strong, nonatomic) BBFace *endFace;
+
 @end
 
 @implementation GameScene
@@ -26,7 +37,21 @@
 -(void)didMoveToView:(SKView *)view {
     NSLog(@"scene size is (%f,%f)", self.size.width, self.size.height);
     
-    self.gridController = [[BBSquareGridController alloc] initWithGridOfWidth:5 andHeight:9];
+    self.grid = [[BBSquareGrid alloc] initWithWidth:5 andHeight:9];
+    self.gridController = [[BBSquareGridController alloc] initWithGrid:self.grid width:5 height:9];
+    
+    BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
+    [btmg buildMaze:self.grid];
+    
+    self.endFace = [self.grid faceForColumn:self.grid.width - 1 andRow:self.grid.height - 1];
+    
+    // hack
+    // TODO: move to a propper resetting method
+    // propper way is to reset all the edges isSolid to NO, and rebuild
+    if (_player) {
+        _startFace = [_grid faceForColumn:0 andRow:0];
+        _playerFace = _startFace;
+    }
     
     UIImage *gridImage = [self.gridController renderGrid];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
@@ -36,23 +61,23 @@
     [self addChild:self.gridSprite];
     
     SKSpriteNode *player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
-    [self.gridController setupPlayer:player];
+    [self setupPlayer:player];
     [self addChild:player];
     player.zPosition = 1;
     
-    self.upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.gridController action:@selector(playerMoveNorth)];
+    self.upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveNorth)];
     self.upSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:self.upSwipeRecognizer];
     
-    self.downSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.gridController action:@selector(playerMoveSouth)];
+    self.downSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveSouth)];
     self.downSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:self.downSwipeRecognizer];
     
-    self.leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.gridController action:@selector(playerMoveWest)];
+    self.leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveWest)];
     self.leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:self.leftSwipeRecognizer];
     
-    self.rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self.gridController action:@selector(playerMoveEast)];
+    self.rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveEast)];
     self.rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:self.rightSwipeRecognizer];
 }
@@ -75,7 +100,7 @@
 }
 
 - (void)resetMaze {
-    self.gridController = [self.gridController initWithGridOfWidth:5 andHeight:9];
+    self.gridController = [self.gridController initWithGrid:self.grid width:5 height:9];
     
     UIImage *gridImage = [self.gridController renderGrid];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
@@ -83,24 +108,98 @@
 }
 
 
-//-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    /* Called when a touch begins */
-//    
-////    for (UITouch *touch in touches) {
-////        CGPoint location = [touch locationInNode:self];
-////        
-////        if (location.y > self.size.height / 2) {
-////            NSLog(@"Move up");
-////            [self.gridController playerMoveUp];
-////        }
-////        
-////        if (location.y < self.size.height / 2) {
-////            NSLog(@"Move down");
-////            [self.gridController playerMoveDown];
-////        }
-////        
-////    }
-//}
+- (void)setupPlayer:(SKSpriteNode *)player {
+    self.player = player;
+    self.playerFace = [self.grid faceForColumn:0 andRow:0];
+    
+    [self updatePlayerPosition];
+}
+
+- (void)playerMoveNorth {
+    CGPoint bounceDist = [self.gridController centerToWallDistance];
+    if (!self.playerFace.northFace) {
+        
+        SKAction *moveToWall = [SKAction moveByX:0 y:bounceDist.y duration:0.125];
+        SKAction *moveBack = [SKAction moveByX:0 y:-bounceDist.y duration:0.125];
+        
+        [self.player runAction:[SKAction sequence:@[moveToWall, moveBack]] withKey:@"moving"];
+        
+        NSLog(@"Can't move north");
+        return;
+    }
+    
+    if (!self.playerFace.northEdge.isSolid) {
+        self.playerFace = self.playerFace.northFace;
+        [self updatePlayerPosition];
+    } else {
+        
+        SKAction *moveToWall = [SKAction moveByX:0 y:bounceDist.y duration:0.125];
+        SKAction *moveBack = [SKAction moveByX:0 y:-bounceDist.y duration:0.125];
+        
+        [self.player runAction:[SKAction sequence:@[moveToWall, moveBack]] withKey:@"moving"];
+        NSLog(@"Blocked by a wall");
+    }
+}
+
+- (void)playerMoveSouth {
+    if (!self.playerFace.southFace) {
+        NSLog(@"Can't move south");
+        return;
+    }
+    
+    if (!self.playerFace.southEdge.isSolid) {
+        self.playerFace = self.playerFace.southFace;
+        [self updatePlayerPosition];
+    } else {
+        NSLog(@"Blocked by a wall");
+    }
+}
+
+- (void)playerMoveEast {
+    if (!self.playerFace.eastFace) {
+        NSLog(@"Can't move east");
+        return;
+    }
+    
+    if (!self.playerFace.eastEdge.isSolid) {
+        self.playerFace = self.playerFace.eastFace;
+        [self updatePlayerPosition];
+    } else {
+        NSLog(@"Blocked by a wall");
+    }
+}
+
+- (void)playerMoveWest {
+    if (!self.playerFace.westFace) {
+        NSLog(@"Can't move west");
+        return;
+    }
+    
+    if (!self.playerFace.westEdge.isSolid) {
+        self.playerFace = self.playerFace.westFace;
+        [self updatePlayerPosition];
+    } else {
+        NSLog(@"Blocked by a wall");
+    }
+}
+
+- (void)updatePlayerPosition {
+    CGPoint newPosition = [self.gridController pointForFaceCenter:self.playerFace];
+    SKAction *animateMove = [SKAction moveTo:newPosition duration:0.25];
+    [self.player runAction:animateMove completion:^{
+        [self checkSolved];
+    }];
+}
+
+- (void)checkSolved {
+    if (self.playerFace == self.endFace) {
+        
+        self.playerFace = [self.grid faceForColumn:0 andRow:0];
+        [self updatePlayerPosition];
+        
+        [(GameScene *)self.player.scene youWin];
+    }
+}
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class BBSquareGrid;
+
 @interface BBVertex : NSObject
 
 @property (assign, nonatomic) NSInteger row;

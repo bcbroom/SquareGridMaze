@@ -15,6 +15,7 @@
 @class BBFace;
 @class BBEdge;
 @class BBVertex;
+@class BBSquareGrid;
 
 @interface BBSquareGridController : NSObject
 
@@ -23,17 +24,19 @@
 @property (assign, nonatomic) NSInteger padding;
 @property (strong, nonatomic) SKSpriteNode *player;
 
-- (instancetype)initWithGridOfWidth:(NSInteger)width andHeight:(NSInteger)height;
+- (instancetype)initWithGrid:(BBSquareGrid *)grid width:(NSInteger)width height:(NSInteger)height;
 
 - (UIImage *)renderGrid;
 
 - (CGPoint)pointForFaceCenter:(BBFace *)face;
 
-- (void)setupPlayer:(SKSpriteNode *)player;
+- (CGPoint)centerToWallDistance;
 
-- (void)playerMoveNorth;
-- (void)playerMoveSouth;
-- (void)playerMoveEast;
-- (void)playerMoveWest;
+//- (void)setupPlayer:(SKSpriteNode *)player;
+//
+//- (void)playerMoveNorth;
+//- (void)playerMoveSouth;
+//- (void)playerMoveEast;
+//- (void)playerMoveWest;
 
 @end

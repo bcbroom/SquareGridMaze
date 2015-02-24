@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class BBSquareGrid;
+
 @interface BBEdge : NSObject
 
 @property (assign, nonatomic) NSInteger row;
