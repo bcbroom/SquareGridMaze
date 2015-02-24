@@ -71,6 +71,7 @@
     for (NSInteger i = 0; i < self.width ; i++) {
         for (NSInteger j = 0; j < self.height; j++) {
             BBFace *face = [[BBFace alloc] initWithColumn:i andRow:j];
+            face.grid = self;
             self.faces[i][j] = face;
         }
     }
@@ -124,9 +125,11 @@
     for (int i = 0; i < _width; i++) {
         for (int j = 0; j < _height; j++) {
             BBEdge *sEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"S"];
+            sEdge.grid = self;
             _edges[i][j][@"S"] = sEdge;
             
             BBEdge *wEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"W"];
+            wEdge.grid = self;
             _edges[i][j][@"W"] = wEdge;
         }
     }

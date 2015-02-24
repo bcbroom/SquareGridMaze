@@ -10,32 +10,38 @@
 
 @class BBEdge;
 @class BBVertex;
+@class BBSquareGrid;
 
 @interface BBFace : NSObject
 
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSInteger column;
 
-@property (strong, nonatomic) NSMutableArray *neighbors;
-@property (strong, nonatomic) NSMutableArray *edges;
-@property (strong, nonatomic) NSMutableArray *vertices;
+@property (weak, nonatomic) BBSquareGrid *grid;
+
+// everything below is a conviencence reference
+// are they needed? Isn't this premature op?
+
+@property (weak, nonatomic) NSMutableArray *neighbors;
+@property (weak, nonatomic) NSMutableArray *edges;
+@property (weak, nonatomic) NSMutableArray *vertices;
 
 // TODO: should all these references be weak??
 
-@property (strong, nonatomic) BBFace *northFace;
-@property (strong, nonatomic) BBFace *eastFace;
-@property (strong, nonatomic) BBFace *southFace;
-@property (strong, nonatomic) BBFace *westFace;
+@property (weak, nonatomic) BBFace *northFace;
+@property (weak, nonatomic) BBFace *eastFace;
+@property (weak, nonatomic) BBFace *southFace;
+@property (weak, nonatomic) BBFace *westFace;
 
-@property (strong, nonatomic) BBEdge *northEdge;
-@property (strong, nonatomic) BBEdge *eastEdge;
-@property (strong, nonatomic) BBEdge *southEdge;
-@property (strong, nonatomic) BBEdge *westEdge;
+@property (weak, nonatomic) BBEdge *northEdge;
+@property (weak, nonatomic) BBEdge *eastEdge;
+@property (weak, nonatomic) BBEdge *southEdge;
+@property (weak, nonatomic) BBEdge *westEdge;
 
-@property (strong, nonatomic) BBVertex *northEastVertex;
-@property (strong, nonatomic) BBVertex *southEastVertex;
-@property (strong, nonatomic) BBVertex *southWestVertex;
-@property (strong, nonatomic) BBVertex *northWestVertex;
+@property (weak, nonatomic) BBVertex *northEastVertex;
+@property (weak, nonatomic) BBVertex *southEastVertex;
+@property (weak, nonatomic) BBVertex *southWestVertex;
+@property (weak, nonatomic) BBVertex *northWestVertex;
 
 + (instancetype)edgeWithColumn:(NSInteger)column andRow:(NSInteger)row;
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;

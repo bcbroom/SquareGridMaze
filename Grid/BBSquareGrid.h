@@ -12,6 +12,17 @@
 #import "BBEdge.h"
 #import "BBVertex.h"
 
+typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
+    BBSquareGridDirectionNorth,
+    BBSquareGridDirectionEast,
+    BBSquareGridDirectionSouth,
+    BBSquareGridDirectionWest,
+    BBSquareGridDirectionNorthEast,
+    BBSquareGridDirectionSouthEast,
+    BBSquareGridDirectionSouthWest,
+    BBSquareGridDirectionNorthWest
+};
+
 @interface BBSquareGrid : NSObject
 
 @property (assign, nonatomic) NSInteger height;

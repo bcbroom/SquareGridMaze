@@ -13,6 +13,8 @@
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSInteger column;
 
+@property (weak, nonatomic) BBSquareGrid *grid;
+
 + (instancetype)vertexWithColumns:(NSInteger)column andRow:(NSInteger)row;
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;
 

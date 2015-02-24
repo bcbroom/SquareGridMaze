@@ -67,10 +67,11 @@
 }
 
 - (void)playerMoveNorth {
+    CGPoint bounceDist = [self centerToWallDistance];
     if (!self.playerFace.northFace) {
         
-        SKAction *moveToWall = [SKAction moveByX:0 y:(self.faceHeight - self.player.size.height)/2 duration:0.125];
-        SKAction *moveBack = [SKAction moveByX:0 y:-(self.faceHeight - self.player.size.height)/2 duration:0.125];
+        SKAction *moveToWall = [SKAction moveByX:0 y:bounceDist.y duration:0.125];
+        SKAction *moveBack = [SKAction moveByX:0 y:-bounceDist.y duration:0.125];
         
         [self.player runAction:[SKAction sequence:@[moveToWall, moveBack]] withKey:@"moving"];
         
@@ -82,8 +83,9 @@
         self.playerFace = self.playerFace.northFace;
         [self updatePlayerPosition];
     } else {
-        SKAction *moveToWall = [SKAction moveByX:0 y:(self.faceHeight - self.player.size.height)/2 duration:0.125];
-        SKAction *moveBack = [SKAction moveByX:0 y:-(self.faceHeight - self.player.size.height)/2 duration:0.125];
+        
+        SKAction *moveToWall = [SKAction moveByX:0 y:bounceDist.y duration:0.125];
+        SKAction *moveBack = [SKAction moveByX:0 y:-bounceDist.y duration:0.125];
         
         [self.player runAction:[SKAction sequence:@[moveToWall, moveBack]] withKey:@"moving"];
         NSLog(@"Blocked by a wall");
@@ -153,6 +155,10 @@
 - (CGPoint)pointForFaceCenter:(BBFace *)face {
     return CGPointMake(face.column * self.faceWidth + self.faceWidth/2 + self.padding,
                 face.row * self.faceHeight + self.faceHeight/2 + self.padding);
+}
+
+- (CGPoint)centerToWallDistance {
+    return CGPointMake((self.faceWidth - self.player.size.width)/2, (self.faceHeight - self.player.size.height)/2);
 }
 
 - (UIImage *)renderGrid {

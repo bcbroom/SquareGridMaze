@@ -14,6 +14,8 @@
 @property (assign, nonatomic) NSInteger column;
 @property (copy, nonatomic) NSString *side;
 
+@property (weak, nonatomic) BBSquareGrid *grid;
+
 @property (assign, nonatomic) BOOL isSolid;
 
 + (instancetype)edgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
