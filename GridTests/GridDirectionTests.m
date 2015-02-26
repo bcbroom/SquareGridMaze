@@ -35,10 +35,10 @@
     
     // adjacent faces
     // east is nil, since (2,1) is on the right edge
-    BBFace *northFace = [self.grid faceAdjacentToFace:face inDirection:BBSquareGridDirectionNorth];
-    BBFace *eastFace = [self.grid faceAdjacentToFace:face inDirection:BBSquareGridDirectionEast];
-    BBFace *southFace = [self.grid faceAdjacentToFace:face inDirection:BBSquareGridDirectionSouth];
-    BBFace *westFace = [self.grid faceAdjacentToFace:face inDirection:BBSquareGridDirectionWest];
+    BBFace *northFace = [self.grid neighborForFace:face inDirection:BBSquareGridDirectionNorth];
+    BBFace *eastFace = [self.grid neighborForFace:face inDirection:BBSquareGridDirectionEast];
+    BBFace *southFace = [self.grid neighborForFace:face inDirection:BBSquareGridDirectionSouth];
+    BBFace *westFace = [self.grid neighborForFace:face inDirection:BBSquareGridDirectionWest];
     
     
     XCTAssertEqualObjects([self.grid faceForColumn:2 andRow:2], northFace);
@@ -50,10 +50,10 @@
 - (void)testFaceEdgeinDirection {
     BBFace *face = [self.grid faceForColumn:2 andRow:1];
     
-    BBEdge *northEdge = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionNorth];
-    BBEdge *eastEdge  = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionEast];
-    BBEdge *southEdge = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionSouth];
-    BBEdge *westEdge  = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionWest];
+    BBEdge *northEdge = [self.grid borderForFace:face inDirection:BBSquareGridDirectionNorth];
+    BBEdge *eastEdge  = [self.grid borderForFace:face inDirection:BBSquareGridDirectionEast];
+    BBEdge *southEdge = [self.grid borderForFace:face inDirection:BBSquareGridDirectionSouth];
+    BBEdge *westEdge  = [self.grid borderForFace:face inDirection:BBSquareGridDirectionWest];
     
     
     XCTAssertEqualObjects([self.grid edgeForColumn:2 andRow:2 andSide:@"S"], northEdge);

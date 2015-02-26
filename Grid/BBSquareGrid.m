@@ -210,7 +210,7 @@
 }
 
 #pragma mark connections
-- (BBFace *)faceAdjacentToFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
+- (BBFace *)neighborForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
     BBFace *adjacentFace;
     
     switch (direction) {
@@ -237,7 +237,7 @@
     return adjacentFace;
 }
 
-- (BBEdge *)edgeForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
+- (BBEdge *)borderForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
     BBEdge *edge;
     
     switch (direction) {

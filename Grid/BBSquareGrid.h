@@ -39,8 +39,8 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 - (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row;
 
 // face connections
-- (BBFace *)faceAdjacentToFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
-- (BBEdge *)edgeForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
+- (BBFace *)neighborForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
+- (BBEdge *)borderForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
 
 // intended object store
 - (void)setFace:(BBFace *)face forObject:(id)obj;
