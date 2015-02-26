@@ -16,7 +16,10 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
     BBSquareGridDirectionNorth,
     BBSquareGridDirectionEast,
     BBSquareGridDirectionSouth,
-    BBSquareGridDirectionWest,
+    BBSquareGridDirectionWest
+};
+
+typedef NS_ENUM(NSInteger, BBSquareGridDiagonalDirection) {
     BBSquareGridDirectionNorthEast,
     BBSquareGridDirectionSouthEast,
     BBSquareGridDirectionSouthWest,
@@ -41,10 +44,35 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 // face connections
 - (BBFace *)neighborForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
 - (BBEdge *)borderForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
+- (BBVertex *)cornerForFace:(BBFace *)face inDirection:(BBSquareGridDiagonalDirection)direction;
+
+- (NSArray *)neighborsForFace:(BBFace *)face;
+- (NSArray *)bordersForFace:(BBFace *)face;
+- (NSArray *)cornersForFace:(BBFace *)face;
+
+// edge connections
+- (BBFace *)faceJoinedByEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction;
+- (BBEdge *)edgeContinuingEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction;
+- (BBVertex *)endpointForEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction;
+
+- (NSArray *)facesJoinedByEdge:(BBEdge *)edge;
+- (NSArray *)edgesContinuingEdge:(BBEdge *)edge;
+- (NSArray *)endpointsForEdge:(BBEdge *)edge;
+
+// vertex connections
+- (BBFace *)faceTouchesVertex:(BBVertex *)vertex inDirection:(BBSquareGridDiagonalDirection)direction;
+- (BBEdge *)edgeProtrudesFromVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction;
+- (BBVertex *)vertexAdjacentToVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction;
+
+- (NSArray *)facesTouchingVertex:(BBVertex *)vertex;
+- (NSArray *)edgesProtrudingFromVertex:(BBVertex *)vertex;
+- (NSArray *)verticesAdjacentToVertex:(BBVertex *)vertex;
 
 // intended object store
 - (void)setFace:(BBFace *)face forObject:(id)obj;
 - (BBFace *)faceForObject:(id)obj;
+- (void)removeFaceForObject:(id)obj;
+- (NSArray *)allObjectsInGrid;
 
 // working object store
 - (void)setFace:(BBFace *)face forString:(NSString *)key;
@@ -53,8 +81,6 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 
 // internal methods, listed here for testing
 - (BBFace *)faceForKey:(NSString *)key;
-//- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row;
-//- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
-//- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row;
+
 
 @end

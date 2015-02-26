@@ -217,6 +217,10 @@
     return adjacentFace;
 }
 
+- (NSArray *)neighborsForFace:(BBFace *)face {
+    return [NSArray new];
+}
+
 - (BBEdge *)borderForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
     BBEdge *edge;
     
@@ -244,6 +248,66 @@
     return edge;
 }
 
+- (NSArray *)bordersForFace:(BBFace *)face {
+    return [NSArray new];
+}
+
+- (BBVertex *)cornerForFace:(BBFace *)face inDirection:(BBSquareGridDiagonalDirection)direction {
+    return [BBVertex new];
+}
+
+- (NSArray *)cornersForFace:(BBFace *)face {
+    return [NSArray new];
+}
+
+- (BBFace *)faceJoinedByEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    return [BBFace new];
+}
+
+- (NSArray *)facesJoinedByEdge:(BBEdge *)edge {
+    return [NSArray new];
+}
+
+- (BBEdge *)edgeContinuingEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    return [BBEdge new];
+}
+
+- (NSArray *)edgesContinuingEdge:(BBEdge *)edge {
+    return [NSArray new];
+}
+
+- (BBVertex *)endpointForEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    return [BBVertex new];
+}
+
+- (NSArray *)endpointsForEdge:(BBEdge *)edge {
+    return [NSArray new];
+}
+
+- (BBFace *)faceTouchesVertex:(BBVertex *)vertex inDirection:(BBSquareGridDiagonalDirection)direction {
+    return [BBFace new];
+}
+
+- (NSArray *)facesTouchingVertex:(BBVertex *)vertex {
+    return [NSArray new];
+}
+
+- (BBEdge *)edgeProtrudesFromVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction {
+    return [BBEdge new];
+}
+
+- (NSArray *)edgesProtrudingFromVertex:(BBVertex *)vertex {
+    return [NSArray new];
+}
+
+- (BBVertex *)vertexAdjacentToVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction {
+    return [BBVertex new];
+}
+
+- (NSArray *)verticesAdjacentToVertex:(BBVertex *)vertex {
+    return [NSArray new];
+}
+
 # pragma mark Object Storage
 
 // This part is not working, using objects for the key copies the obj, so it has a different address
@@ -254,6 +318,14 @@
 
 - (BBFace *)faceForObject:(id)obj {
     return [self.facesForObject objectForKey:obj];
+}
+
+- (void)removeFaceForObject:(id)obj {
+    [self.facesForObject removeObjectForKey:obj];
+}
+
+- (NSArray *)allObjectsInGrid {
+    return [[self.facesForObject keyEnumerator] allObjects];
 }
 
 // hack version until obj to obj dictionary works
@@ -300,17 +372,5 @@
     
     return [self faceForColumn:col andRow:row];
 }
-
-//- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
-//    return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
-//}
-
-//- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
-//    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", column, row, side];
-//}
-
-//- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row {
-//    return [NSString stringWithFormat:@"Vertex::%ld::%ld", column, row];
-//}
 
 @end
