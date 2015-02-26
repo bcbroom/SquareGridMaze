@@ -47,4 +47,19 @@
     XCTAssertEqualObjects([self.grid faceForColumn:1 andRow:1], westFace);
 }
 
+- (void)testFaceEdgeinDirection {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    
+    BBEdge *northEdge = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionNorth];
+    BBEdge *eastEdge  = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionEast];
+    BBEdge *southEdge = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionSouth];
+    BBEdge *westEdge  = [self.grid edgeForFace:face inDirection:BBSquareGridDirectionWest];
+    
+    
+    XCTAssertEqualObjects([self.grid edgeForColumn:2 andRow:2 andSide:@"S"], northEdge);
+    XCTAssertEqualObjects([self.grid edgeForColumn:3 andRow:1 andSide:@"W"], eastEdge);
+    XCTAssertEqualObjects([self.grid edgeForColumn:2 andRow:1 andSide:@"S"], southEdge);
+    XCTAssertEqualObjects([self.grid edgeForColumn:2 andRow:1 andSide:@"W"], westEdge);
+}
+
 @end

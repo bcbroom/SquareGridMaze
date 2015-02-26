@@ -237,6 +237,33 @@
     return adjacentFace;
 }
 
+- (BBEdge *)edgeForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
+    BBEdge *edge;
+    
+    switch (direction) {
+        case BBSquareGridDirectionNorth:
+            edge = [self edgeForColumn:face.column andRow:face.row + 1 andSide:@"S"];
+            break;
+            
+        case BBSquareGridDirectionEast:
+            edge = [self edgeForColumn:face.column + 1 andRow:face.row andSide:@"W"];
+            break;
+            
+        case BBSquareGridDirectionSouth:
+            edge = [self edgeForColumn:face.column andRow:face.row andSide:@"S"];
+            break;
+            
+        case BBSquareGridDirectionWest:
+            edge = [self edgeForColumn:face.column andRow:face.row andSide:@"W"];
+            break;
+            
+        default:
+            break;
+    }
+    
+    return edge;
+}
+
 # pragma mark Object Storage
 
 // This part is not working, using objects for the key copies the obj, so it has a different address

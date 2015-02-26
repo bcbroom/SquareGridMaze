@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 
 // face connections
 - (BBFace *)faceAdjacentToFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
+- (BBEdge *)edgeForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
 
 // intended object store
 - (void)setFace:(BBFace *)face forObject:(id)obj;
