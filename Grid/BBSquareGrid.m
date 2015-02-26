@@ -197,17 +197,18 @@
 
 # pragma mark Object Storage
 
-// This part is not working, using objects for the key copies the obj, so it has a different address
-
-//- (void)setFace:(BBFace *)face forObject:(id)obj {
-//    
-//    [self.locationsForObjects setObject:[face key] forKey:obj];
-//}
+//// This part is not working, using objects for the key copies the obj, so it has a different address
 //
+//- (void)setFace:(BBFace *)face forObject:(id)obj {
+////    
+////    [self.locationsForObjects setObject:[face key] forKey:obj];
+//}
+////
 //- (BBFace *)faceForObject:(id)obj {
-//    NSString *key = [self.locationsForObjects objectForKey:obj];
-//    BBFace *face = [self faceForKey:key];
-//    return face;
+////    NSString *key = [self.locationsForObjects objectForKey:obj];
+////    BBFace *face = [self faceForKey:key];
+////    return face;
+//    return nil;
 //}
 
 - (void)setFace:(BBFace *)face forString:(NSString *)key {
@@ -216,6 +217,10 @@
 
 - (BBFace *)faceForString:(NSString *)key {
     return (BBFace *)[self.locationsForObjects valueForKey:key];
+}
+
+- (void)removeFaceForString:(NSString *)key {
+    [self.locationsForObjects removeObjectForKey:key];
 }
 
 - (BBFace *)faceForKey:(NSString *)key {

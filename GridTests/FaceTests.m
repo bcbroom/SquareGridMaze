@@ -37,10 +37,7 @@
     XCTAssertEqual(face.row, 3);    
 }
 
-- (void)testCountAllFaces {
-    NSArray *faces = [self.grid allFaces];
-    XCTAssertEqual(faces.count, 12);
-}
+
 
 - (void)testCentralFaceNeighborCount {
     BBFace *face = [self.grid faceForColumn:1 andRow:1];
@@ -83,6 +80,12 @@
     BBFace *upperRightCornerFace = [self.grid faceForColumn:2 andRow:3];
     XCTAssertNil(upperRightCornerFace.northFace);
     XCTAssertNil(upperRightCornerFace.eastFace);
+}
+
+- (void)testKeyForFace {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    NSString *key = [face key];
+    XCTAssertEqualObjects(key, @"Face::2::1");
 }
 
 @end

@@ -40,7 +40,12 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 
 //- (void)setFace:(BBFace *)face forObject:(id)obj;
 //- (BBFace *)faceForObject:(id)obj;
+
 - (void)setFace:(BBFace *)face forString:(NSString *)key;
 - (BBFace *)faceForString:(NSString *)key;
+- (void)removeFaceForString:(NSString *)key;
+
+// internal methods, listed here for testing
+- (BBFace *)faceForKey:(NSString *)key;
 
 @end

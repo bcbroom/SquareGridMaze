@@ -31,9 +31,7 @@
     [super tearDown];
 }
 
-- (void)testAllEdgesCount {
-    XCTAssertEqual(self.grid.allEdges.count, 31);
-}
+
 
 - (void)testCentralFaceEdgeCount {
     BBFace *face = [self.grid faceForColumn:1 andRow:1];
