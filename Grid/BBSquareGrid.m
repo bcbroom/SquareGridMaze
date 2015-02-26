@@ -13,9 +13,9 @@
 
 @interface BBSquareGrid ()
 
-@property (strong, nonatomic) NSMutableArray *faces;
-@property (strong, nonatomic) NSMutableArray *edges;
-@property (strong, nonatomic) NSMutableArray *vertices;
+@property (strong, nonatomic) NSMutableDictionary *faces;
+@property (strong, nonatomic) NSMutableDictionary *edges;
+@property (strong, nonatomic) NSMutableDictionary *vertices;
 @property (strong, nonatomic) NSMutableDictionary *locationsForObjects;
 @property (strong, nonatomic) NSMapTable *facesForObject;
 
@@ -48,23 +48,11 @@
 }
 
 - (void)buildDataStructures {
-    _faces = [NSMutableArray new];
-    for (int i = 0; i < _width; i++) {
-        [_faces addObject:[NSMutableArray new]];
-    }
+    _faces = [NSMutableDictionary new];
     
-    _edges = [NSMutableArray new];
-    // +1 to both dimensions since the outside E,N edges are
-    // technically in the next cell, outside the face bounds
-    for (int i = 0; i < _width + 1; i++) {
-        [_edges addObject:[NSMutableArray new]];
-        
-        for (int j = 0; j < _height + 1; j++) {
-            _edges[i][j] = [NSMutableDictionary new];
-        }
-    }
+    _edges = [NSMutableDictionary new];
     
-    _vertices = [NSMutableArray new];
+    _vertices = [NSMutableDictionary new];
     
     _locationsForObjects = [NSMutableDictionary new];
     _facesForObject = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableWeakMemory];
@@ -77,7 +65,7 @@
         for (NSInteger j = 0; j < self.height; j++) {
             BBFace *face = [[BBFace alloc] initWithColumn:i andRow:j];
             face.grid = self;
-            self.faces[i][j] = face;
+            [self.faces setObject:face forKey:face.key];
         }
     }
 }
@@ -123,17 +111,11 @@
         return nil;
     }
     
-    return self.faces[column][row];
+    return [self.faces objectForKey:[self keyForFaceWithColumn:column andRow:row]];
 }
 
 - (NSArray *)allFaces {
-    NSMutableArray *allFaces = [NSMutableArray new];
-    
-    for (NSMutableArray *column in self.faces) {
-        [allFaces addObjectsFromArray:column];
-    }
-    
-    return allFaces;
+    return [self.faces allValues];
 }
 
 #pragma mark Edges
@@ -143,24 +125,24 @@
         for (int j = 0; j < _height; j++) {
             BBEdge *sEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"S"];
             sEdge.grid = self;
-            _edges[i][j][@"S"] = sEdge;
+            [self.edges setObject:sEdge forKey:sEdge.key];
             
             BBEdge *wEdge = [BBEdge edgeWithColumn:i andRow:j andSide:@"W"];
             wEdge.grid = self;
-            _edges[i][j][@"W"] = wEdge;
+            [self.edges setObject:wEdge forKey:wEdge.key];
         }
     }
     
     // add top edges, which are S edges for the face just beyond grid edge
     for (int i = 0; i < _width; i++) {
         BBEdge *topEdge = [BBEdge edgeWithColumn:i andRow:_height andSide:@"S"];
-        _edges[i][_height][@"S"] = topEdge;
+        [self.edges setObject:topEdge forKey:topEdge.key];
     }
     
     // add right edges, similarly, but these are W edges
     for (int j = 0; j < _height; j++) {
         BBEdge *rightEdge = [BBEdge edgeWithColumn:_width andRow:j andSide:@"W"];
-        _edges[_width][j][@"W"] = rightEdge;
+        [self.edges setObject:rightEdge forKey:rightEdge.key];
     }
 }
 
@@ -176,25 +158,23 @@
 }
 
 - (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
-    return self.edges[column][row][side];
+    return [self.edges objectForKey:[self keyForEdgeWithColumn:column andRow:row andSide:side]];
 }
 
 - (NSArray *)allEdges {
-    NSMutableArray *allEdges = [NSMutableArray new];
-    
-    for (NSMutableArray *row in self.edges) {
-        for (NSMutableDictionary *dict in row) {
-            [allEdges addObjectsFromArray:dict.allValues];
-        }
-    }
-    
-    return allEdges;
+    return [self.edges allValues];
 }
 
 #pragma mark Vertices
 
 - (void)addVertices {
-    
+    for (NSInteger i = 0; i <= self.width ; i++) {
+        for (NSInteger j = 0; j <= self.height; j++) {
+            BBVertex *vertex = [[BBVertex alloc] initWithColumn:i andRow:j];
+            vertex.grid = self;
+            [self.vertices setObject:vertex forKey:vertex.key];
+        }
+    }
 }
 
 - (void)buildVertexConnections {
@@ -202,11 +182,11 @@
 }
 
 - (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row {
-    return [BBVertex new];
+    return [self.vertices objectForKey:[self keyForVertexWithColumn:column andRow:row]];
 }
 
-- (NSMutableArray *)allVertices {
-    return self.vertices;
+- (NSArray *)allVertices {
+    return [self.vertices allValues];
 }
 
 #pragma mark connections
@@ -323,6 +303,14 @@
 
 - (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
     return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
+}
+
+- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
+    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", column, row, side];
+}
+
+- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row {
+    return [NSString stringWithFormat:@"Vertex::%ld::%ld", column, row];
 }
 
 @end

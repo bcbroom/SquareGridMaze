@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 
 - (NSArray *)allFaces;
 - (NSArray *)allEdges;
-- (NSMutableArray *)allVertices;
+- (NSArray *)allVertices;
 
 - (BBFace *)faceForColumn:(NSInteger)column andRow:(NSInteger)row;
 - (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
@@ -54,5 +54,7 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 // internal methods, listed here for testing
 - (BBFace *)faceForKey:(NSString *)key;
 - (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row;
+- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
+- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row;
 
 @end

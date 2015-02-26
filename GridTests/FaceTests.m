@@ -32,6 +32,13 @@
 }
 
 
+- (void)testFaceFromColumnAndRow {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    
+    XCTAssertNotNil(face);
+    XCTAssertEqual(2, face.column);
+    XCTAssertEqual(1, face.row);
+}
 
 - (void)testCentralFaceNeighborCount {
     BBFace *face = [self.grid faceForColumn:1 andRow:1];

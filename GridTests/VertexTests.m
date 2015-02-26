@@ -31,6 +31,14 @@
     [super tearDown];
 }
 
+- (void)testVertexFromColumnAndRow {
+    BBVertex *vertex = [self.grid vertexForColumn:2 andRow:1];
+    
+    XCTAssertNotNil(vertex);
+    XCTAssertEqual(2, vertex.column);
+    XCTAssertEqual(1, vertex.row);
+}
+
 - (void)testKeyForVertex {
     BBVertex *vertex = [self.grid vertexForColumn:2 andRow:1];
     NSString *key = [vertex key];
