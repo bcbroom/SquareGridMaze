@@ -18,6 +18,8 @@
 @property (weak, nonatomic) BBSquareGrid *grid;
 
 + (instancetype)vertexWithColumns:(NSInteger)column andRow:(NSInteger)row;
++ (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row;
+
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;
 - (NSString *)key;
 

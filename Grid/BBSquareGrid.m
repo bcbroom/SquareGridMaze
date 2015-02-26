@@ -111,7 +111,7 @@
         return nil;
     }
     
-    return [self.faces objectForKey:[self keyForFaceWithColumn:column andRow:row]];
+    return [self.faces objectForKey:[BBFace keyForFaceWithColumn:column andRow:row]];
 }
 
 - (NSArray *)allFaces {
@@ -158,7 +158,7 @@
 }
 
 - (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
-    return [self.edges objectForKey:[self keyForEdgeWithColumn:column andRow:row andSide:side]];
+    return [self.edges objectForKey:[BBEdge keyForEdgeWithColumn:column andRow:row andSide:side]];
 }
 
 - (NSArray *)allEdges {
@@ -182,7 +182,7 @@
 }
 
 - (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row {
-    return [self.vertices objectForKey:[self keyForVertexWithColumn:column andRow:row]];
+    return [self.vertices objectForKey:[BBVertex keyForVertexWithColumn:column andRow:row]];
 }
 
 - (NSArray *)allVertices {
@@ -301,16 +301,16 @@
     return [self faceForColumn:col andRow:row];
 }
 
-- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
-    return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
-}
+//- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
+//    return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
+//}
 
-- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
-    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", column, row, side];
-}
+//- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
+//    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", column, row, side];
+//}
 
-- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row {
-    return [NSString stringWithFormat:@"Vertex::%ld::%ld", column, row];
-}
+//- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row {
+//    return [NSString stringWithFormat:@"Vertex::%ld::%ld", column, row];
+//}
 
 @end

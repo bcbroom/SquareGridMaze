@@ -14,6 +14,10 @@
     return [[BBVertex alloc] initWithColumn:column andRow:row];
 }
 
++ (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row {
+    return [NSString stringWithFormat:@"Vertex::%ld::%ld", column, row];
+}
+
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row {
     self = [super init];
     if (self) {

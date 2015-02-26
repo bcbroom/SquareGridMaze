@@ -44,6 +44,8 @@
 @property (weak, nonatomic) BBVertex *northWestVertex;
 
 + (instancetype)edgeWithColumn:(NSInteger)column andRow:(NSInteger)row;
++ (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row;
+
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;
 - (NSString *)key;
 

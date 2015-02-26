@@ -15,6 +15,9 @@
     return edge;
 }
 
++ (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
+    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", column, row, side];
+}
 
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side {
     self = [super init];

@@ -53,8 +53,8 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 
 // internal methods, listed here for testing
 - (BBFace *)faceForKey:(NSString *)key;
-- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row;
-- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
-- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row;
+//- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row;
+//- (NSString *)keyForEdgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
+//- (NSString *)keyForVertexWithColumn:(NSInteger)column andRow:(NSInteger)row;
 
 @end

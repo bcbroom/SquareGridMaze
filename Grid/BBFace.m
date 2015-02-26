@@ -21,6 +21,10 @@
     return face;
 }
 
++ (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
+    return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
+}
+
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row {
     self = [super init];
     if (self) {
@@ -43,7 +47,7 @@
 }
 
 - (NSString *)key {
-    return [self.grid keyForFaceWithColumn:self.column andRow:self.row];
+    return [BBFace keyForFaceWithColumn:self.column andRow:self.row];
 }
 
 @end
