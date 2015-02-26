@@ -29,18 +29,23 @@ typedef NS_ENUM(NSInteger, BBSquareGridDirection) {
 @property (assign, nonatomic) NSInteger width;
 
 - (instancetype)initWithWidth:(NSInteger)width andHeight:(NSInteger)height;
-- (BBFace *)faceForColumn:(NSInteger)column andRow:(NSInteger)row;
+
 - (NSArray *)allFaces;
-
-- (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
 - (NSArray *)allEdges;
-
-- (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row;
 - (NSMutableArray *)allVertices;
 
-//- (void)setFace:(BBFace *)face forObject:(id)obj;
-//- (BBFace *)faceForObject:(id)obj;
+- (BBFace *)faceForColumn:(NSInteger)column andRow:(NSInteger)row;
+- (BBEdge *)edgeForColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
+- (BBVertex *)vertexForColumn:(NSInteger)column andRow:(NSInteger)row;
 
+// face connections
+- (BBFace *)faceAdjacentToFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction;
+
+// intended object store
+- (void)setFace:(BBFace *)face forObject:(id)obj;
+- (BBFace *)faceForObject:(id)obj;
+
+// working object store
 - (void)setFace:(BBFace *)face forString:(NSString *)key;
 - (BBFace *)faceForString:(NSString *)key;
 - (void)removeFaceForString:(NSString *)key;

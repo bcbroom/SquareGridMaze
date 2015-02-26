@@ -31,12 +31,6 @@
     [super tearDown];
 }
 
-- (void)testColumnAndRowDesignationMakesSense {
-    BBFace *face = [self.grid faceForColumn:2 andRow:3];
-    XCTAssertEqual(face.column, 2);
-    XCTAssertEqual(face.row, 3);    
-}
-
 
 
 - (void)testCentralFaceNeighborCount {
@@ -86,6 +80,11 @@
     BBFace *face = [self.grid faceForColumn:2 andRow:1];
     NSString *key = [face key];
     XCTAssertEqualObjects(key, @"Face::2::1");
+}
+
+- (void)testFaceBackpointerToGrid {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    XCTAssertEqualObjects(self.grid, face.grid);
 }
 
 @end

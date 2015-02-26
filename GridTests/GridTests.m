@@ -31,6 +31,22 @@
     [super tearDown];
 }
 
+- (void)testFaceForColumnAndRow {
+    BBFace *face = [self.grid faceForColumn:2 andRow:3];
+    XCTAssertEqual(face.column, 2);
+    XCTAssertEqual(face.row, 3);
+}
+
+- (void)testColumnOutOfBounds {
+    XCTAssertNil([self.grid faceForColumn:self.grid.width andRow:0]);
+    XCTAssertNil([self.grid faceForColumn:-1 andRow:0]);
+}
+
+- (void)testRowOutOfABounds {
+    XCTAssertNil([self.grid faceForColumn:0 andRow:self.grid.height]);
+    XCTAssertNil([self.grid faceForColumn:0 andRow:-1]);
+}
+
 - (void)testCountAllFaces {
     NSArray *faces = [self.grid allFaces];
     XCTAssertEqual(faces.count, 12);
@@ -68,6 +84,16 @@
     [self.grid removeFaceForString:@"object"];
     
     XCTAssertNil([self.grid faceForString:@"object"]);
+}
+
+- (void)testFaceForObject {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    NSNumber *object = [NSNumber numberWithDouble:3.14];
+    
+    [self.grid setFace:face forObject:object];
+    BBFace *result = [self.grid faceForObject:object];
+    
+    XCTAssertEqualObjects(face, result);
 }
 
 

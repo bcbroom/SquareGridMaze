@@ -109,6 +109,18 @@
 }
 
 - (BBFace *)faceForColumn:(NSInteger)column andRow:(NSInteger)row {
+    if (column >= self.width) {
+        return nil;
+    }
+    
+    if (row >= self.height) {
+        return nil;
+    }
+    
+    if (row < 0 || column < 0) {
+        return nil;
+    }
+    
     return self.faces[column][row];
 }
 
@@ -195,21 +207,49 @@
     return self.vertices;
 }
 
+#pragma mark connections
+- (BBFace *)faceAdjacentToFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {
+    BBFace *adjacentFace;
+    
+    switch (direction) {
+        case BBSquareGridDirectionNorth:
+            adjacentFace = [self faceForColumn:face.column andRow:face.row + 1];
+            break;
+            
+        case BBSquareGridDirectionEast:
+            adjacentFace = [self faceForColumn:face.column + 1 andRow:face.row];
+            break;
+            
+        case BBSquareGridDirectionSouth:
+            adjacentFace = [self faceForColumn:face.column andRow:face.row - 1];
+            break;
+            
+        case BBSquareGridDirectionWest:
+            adjacentFace = [self faceForColumn:face.column - 1 andRow:face.row];
+            break;
+            
+        default:
+            break;
+    }
+    
+    return adjacentFace;
+}
+
 # pragma mark Object Storage
 
-//// This part is not working, using objects for the key copies the obj, so it has a different address
+// This part is not working, using objects for the key copies the obj, so it has a different address
+
+- (void)setFace:(BBFace *)face forObject:(id)obj {
+//    
+//    [self.locationsForObjects setObject:[face key] forKey:obj];
+}
 //
-//- (void)setFace:(BBFace *)face forObject:(id)obj {
-////    
-////    [self.locationsForObjects setObject:[face key] forKey:obj];
-//}
-////
-//- (BBFace *)faceForObject:(id)obj {
-////    NSString *key = [self.locationsForObjects objectForKey:obj];
-////    BBFace *face = [self faceForKey:key];
-////    return face;
-//    return nil;
-//}
+- (BBFace *)faceForObject:(id)obj {
+//    NSString *key = [self.locationsForObjects objectForKey:obj];
+//    BBFace *face = [self faceForKey:key];
+//    return face;
+    return nil;
+}
 
 - (void)setFace:(BBFace *)face forString:(NSString *)key {
     [self.locationsForObjects setValue:face forKey:key];
