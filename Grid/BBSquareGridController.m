@@ -38,10 +38,6 @@
     return self;
 }
 
-//- (instancetype)init {
-//    return [self initWithGridOfWidth:3 andHeight:4];
-//}
-
 - (CGPoint)pointForFaceCenter:(BBFace *)face {
     return CGPointMake(face.column * self.faceWidth + self.faceWidth/2 + self.padding,
                 face.row * self.faceHeight + self.faceHeight/2 + self.padding);
@@ -61,8 +57,6 @@
     [[UIColor lightGrayColor] setFill];
     CGContextFillRect(ctx, CGRectMake(0, 0, totalWidth, totalHeight));
     
-    //Then draw whatever you need, remember to set fill and stroke colors.
-    
     // init for random colors
     srand48(time(0));
     
@@ -78,9 +72,6 @@
 //        [[NSString stringWithFormat:@"(%ld,%ld)", face.column, face.row] drawAtPoint:CGPointMake(face.column * self.faceWidth + self.padding,
 //                                          totalHeight - (face.row * self.faceHeight + self.padding + self.faceHeight)) withFont:[UIFont systemFontOfSize:14.0]];
     }
-    
-    //[[UIColor whiteColor] setStroke];
-    //CGContextSetLineWidth(ctx, 1.0);
     
     // lines for edges
     

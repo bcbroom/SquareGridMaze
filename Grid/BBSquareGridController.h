@@ -32,11 +32,4 @@
 
 - (CGPoint)centerToWallDistance;
 
-//- (void)setupPlayer:(SKSpriteNode *)player;
-//
-//- (void)playerMoveNorth;
-//- (void)playerMoveSouth;
-//- (void)playerMoveEast;
-//- (void)playerMoveWest;
-
 @end
