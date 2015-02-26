@@ -48,7 +48,7 @@
 }
 
 - (CGPoint)centerToWallDistance {
-    return CGPointMake((self.faceWidth - self.player.size.width)/2, (self.faceHeight - self.player.size.height)/2);
+    return CGPointMake((self.faceWidth)/2, (self.faceHeight)/2);
 }
 
 - (UIImage *)renderGrid {
@@ -85,7 +85,7 @@
     // lines for edges
     
     for (BBEdge *edge in [self.grid allEdges]) {
-        if (edge.isSolid) {
+        if (edge.isWall) {
             [[UIColor blackColor] setStroke];
             CGContextSetLineWidth(ctx, 2.0);
         } else {

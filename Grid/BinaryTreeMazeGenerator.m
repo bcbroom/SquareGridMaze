@@ -12,23 +12,29 @@
 
 @implementation BinaryTreeMazeGenerator
 
-- (void)buildMaze:(BBSquareGrid *)grid {
+- (void)buildMazeOnGrid:(BBSquareGrid *)grid {
+    // reset all edges to not wall
+    for (BBEdge *edge in grid.allEdges) {
+        edge.isWall = NO;
+    }
+    
+    
     for (BBFace *face in grid.allFaces) {
         // edge of grid should be solid
         if (face.row == 0) {
-            face.southEdge.isSolid = YES;
+            face.southEdge.isWall = YES;
         }
         
         if (face.column == 0) {
-            face.westEdge.isSolid = YES;
+            face.westEdge.isWall = YES;
         }
         
         if (face.row == grid.height - 1) {
-            face.northEdge.isSolid = YES;
+            face.northEdge.isWall = YES;
         }
         
         if (face.column == grid.width - 1) {
-            face.eastEdge.isSolid = YES;
+            face.eastEdge.isWall = YES;
         }
         
         // pick north or east to make open
@@ -36,9 +42,9 @@
             NSInteger choice = arc4random_uniform(2);
             
             if (choice == 0) {
-                face.eastEdge.isSolid = YES;
+                face.eastEdge.isWall = YES;
             } else {
-                face.northEdge.isSolid = YES;
+                face.northEdge.isWall = YES;
             }
         }
     }    

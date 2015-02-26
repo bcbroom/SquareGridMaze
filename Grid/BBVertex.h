@@ -19,5 +19,6 @@
 
 + (instancetype)vertexWithColumns:(NSInteger)column andRow:(NSInteger)row;
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;
+- (NSString *)key;
 
 @end

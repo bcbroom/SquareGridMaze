@@ -18,9 +18,10 @@
 
 @property (weak, nonatomic) BBSquareGrid *grid;
 
-@property (assign, nonatomic) BOOL isSolid;
+@property (assign, nonatomic) BOOL isWall;
 
 + (instancetype)edgeWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row andSide:(NSString *)side;
+- (NSString *)key;
 
 @end

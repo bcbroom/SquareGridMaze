@@ -42,4 +42,8 @@
     return self;
 }
 
+- (NSString *)key {
+    return [NSString stringWithFormat:@"Face::%ld::%ld", self.column, self.row];
+}
+
 @end

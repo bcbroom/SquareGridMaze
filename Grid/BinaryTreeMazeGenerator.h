@@ -12,6 +12,6 @@
 
 @interface BinaryTreeMazeGenerator : NSObject
 
-- (void)buildMaze:(BBSquareGrid *)grid;
+- (void)buildMazeOnGrid:(BBSquareGrid *)grid;
 
 @end

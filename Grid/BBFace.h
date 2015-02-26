@@ -22,9 +22,9 @@
 // everything below is a conviencence reference
 // are they needed? Isn't this premature op?
 
-@property (weak, nonatomic) NSMutableArray *neighbors;
-@property (weak, nonatomic) NSMutableArray *edges;
-@property (weak, nonatomic) NSMutableArray *vertices;
+@property (strong, nonatomic) NSMutableArray *neighbors;
+@property (strong, nonatomic) NSMutableArray *edges;
+@property (strong, nonatomic) NSMutableArray *vertices;
 
 // TODO: should all these references be weak??
 
@@ -45,5 +45,6 @@
 
 + (instancetype)edgeWithColumn:(NSInteger)column andRow:(NSInteger)row;
 - (instancetype)initWithColumn:(NSInteger)column andRow:(NSInteger)row;
+- (NSString *)key;
 
 @end

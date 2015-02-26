@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray *faces;
 @property (strong, nonatomic) NSMutableArray *edges;
 @property (strong, nonatomic) NSMutableArray *vertices;
+@property (strong, nonatomic) NSMutableDictionary *locationsForObjects;
 
 @end
 
@@ -63,6 +64,8 @@
     }
     
     _vertices = [NSMutableArray new];
+    
+    _locationsForObjects = [NSMutableDictionary new];
 }
 
 #pragma mark Faces
@@ -192,5 +195,59 @@
     return self.vertices;
 }
 
+# pragma mark Object Storage
+
+// This part is not working, using objects for the key copies the obj, so it has a different address
+
+//- (void)setFace:(BBFace *)face forObject:(id)obj {
+//    
+//    [self.locationsForObjects setObject:[face key] forKey:obj];
+//}
+//
+//- (BBFace *)faceForObject:(id)obj {
+//    NSString *key = [self.locationsForObjects objectForKey:obj];
+//    BBFace *face = [self faceForKey:key];
+//    return face;
+//}
+
+- (void)setFace:(BBFace *)face forString:(NSString *)key {
+    [self.locationsForObjects setValue:face forKey:key];
+}
+
+- (BBFace *)faceForString:(NSString *)key {
+    return (BBFace *)[self.locationsForObjects valueForKey:key];
+}
+
+- (BBFace *)faceForKey:(NSString *)key {
+    // assert that string starts with Face
+    if (![[key substringToIndex:4] isEqualToString:@"Face"]) {
+        NSLog(@"Error - Key for grid face does not include \'Face\'.");
+        return nil;
+    }
+    
+    // parse Face::%ld::%ld
+    
+    NSUInteger keyLength = key.length;
+    NSUInteger firstMarkerLocation = [key rangeOfString:@"::"].location;
+    NSRange secondRange = NSMakeRange(firstMarkerLocation + 2, keyLength - firstMarkerLocation - 2);
+    //NSString *secondKeyString = [key substringWithRange:secondRange];
+    NSUInteger secondMarkerLocation = [key rangeOfString:@"::" options:NSLiteralSearch range:secondRange].location;
+    
+    if (firstMarkerLocation == NSNotFound) {
+        NSLog(@"Error - first marker not found");
+    }
+    
+    if (secondMarkerLocation == NSNotFound) {
+        NSLog(@"Error - second marker not found");
+    }
+    
+    NSString *columnString = [key substringWithRange:NSMakeRange(firstMarkerLocation + 2, secondMarkerLocation - firstMarkerLocation - 2)];
+    NSString *rowString = [key substringWithRange:NSMakeRange(secondMarkerLocation + 2, keyLength - secondMarkerLocation - 2)];
+    
+    NSInteger col = [columnString integerValue];
+    NSInteger row = [rowString integerValue];
+    
+    return [self faceForColumn:col andRow:row];
+}
 
 @end
