@@ -96,5 +96,11 @@
     XCTAssertEqualObjects(face, result);
 }
 
+- (void)testKeyForFace {
+    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+    NSString *testKey = [self.grid keyForFaceWithColumn:face.column andRow:face.row];
+    XCTAssertEqualObjects(face.key, testKey);
+}
+
 
 @end

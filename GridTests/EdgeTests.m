@@ -58,6 +58,11 @@
     XCTAssertEqual(faceOneEdges.count, 0);
 }
 
+- (void)testKey {
+    BBEdge *edge = [self.grid edgeForColumn:2 andRow:1 andSide:@"W"];
+    XCTAssertEqualObjects(edge.key, @"Edge::2::1::W");
+}
+
 
 
 @end

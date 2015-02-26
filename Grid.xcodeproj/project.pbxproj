@@ -25,6 +25,7 @@
 		D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD31A8EDC6000952ADF /* EdgeTests.m */; };
 		D3A69C901A9F6A3400601E52 /* GridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C8F1A9F6A3400601E52 /* GridTests.m */; };
 		D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C911A9F76B600601E52 /* GridDirectionTests.m */; };
+		D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C931A9FA2A200601E52 /* VertexTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		D37F1FD31A8EDC6000952ADF /* EdgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdgeTests.m; sourceTree = "<group>"; };
 		D3A69C8F1A9F6A3400601E52 /* GridTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridTests.m; sourceTree = "<group>"; };
 		D3A69C911A9F76B600601E52 /* GridDirectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridDirectionTests.m; sourceTree = "<group>"; };
+		D3A69C931A9FA2A200601E52 /* VertexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				D3A69C911A9F76B600601E52 /* GridDirectionTests.m */,
 				D37F1FB91A8D993D00952ADF /* FaceTests.m */,
 				D37F1FD31A8EDC6000952ADF /* EdgeTests.m */,
+				D3A69C931A9FA2A200601E52 /* VertexTests.m */,
 				D37F1FB71A8D993D00952ADF /* Supporting Files */,
 			);
 			path = GridTests;
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */,
 				D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */,
 				D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */,
 				D37F1FBA1A8D993D00952ADF /* FaceTests.m in Sources */,

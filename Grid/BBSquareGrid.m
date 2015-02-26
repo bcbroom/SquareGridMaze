@@ -321,4 +321,8 @@
     return [self faceForColumn:col andRow:row];
 }
 
+- (NSString *)keyForFaceWithColumn:(NSInteger)column andRow:(NSInteger)row {
+    return [NSString stringWithFormat:@"Face::%ld::%ld", column, row];
+}
+
 @end

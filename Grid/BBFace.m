@@ -5,7 +5,7 @@
 //  Created by Brian Broom on 2/12/15.
 //  Copyright (c) 2015 Brian Broom. All rights reserved.
 //
-
+#import "BBSquareGrid.h"
 #import "BBFace.h"
 
 @interface BBFace ()
@@ -43,7 +43,7 @@
 }
 
 - (NSString *)key {
-    return [NSString stringWithFormat:@"Face::%ld::%ld", self.column, self.row];
+    return [self.grid keyForFaceWithColumn:self.column andRow:self.row];
 }
 
 @end

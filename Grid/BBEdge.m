@@ -27,7 +27,7 @@
 }
 
 - (NSString *)key {
-    return [NSString stringWithFormat:@"Face::%ld::%ld::%@", self.column, self.row, self.side];
+    return [NSString stringWithFormat:@"Edge::%ld::%ld::%@", self.column, self.row, self.side];
 }
 
 @end

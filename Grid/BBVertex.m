@@ -24,7 +24,7 @@
 }
 
 - (NSString *)key {
-    return [NSString stringWithFormat:@"Face::%ld::%ld", self.column, self.row];
+    return [NSString stringWithFormat:@"Vertex::%ld::%ld", self.column, self.row];
 }
 
 @end
