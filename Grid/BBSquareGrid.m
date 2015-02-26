@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSMutableArray *edges;
 @property (strong, nonatomic) NSMutableArray *vertices;
 @property (strong, nonatomic) NSMutableDictionary *locationsForObjects;
+@property (strong, nonatomic) NSMapTable *facesForObject;
 
 @end
 
@@ -66,6 +67,7 @@
     _vertices = [NSMutableArray new];
     
     _locationsForObjects = [NSMutableDictionary new];
+    _facesForObject = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableWeakMemory];
 }
 
 #pragma mark Faces
@@ -240,17 +242,14 @@
 // This part is not working, using objects for the key copies the obj, so it has a different address
 
 - (void)setFace:(BBFace *)face forObject:(id)obj {
-//    
-//    [self.locationsForObjects setObject:[face key] forKey:obj];
-}
-//
-- (BBFace *)faceForObject:(id)obj {
-//    NSString *key = [self.locationsForObjects objectForKey:obj];
-//    BBFace *face = [self faceForKey:key];
-//    return face;
-    return nil;
+    [self.facesForObject setObject:face forKey:obj];
 }
 
+- (BBFace *)faceForObject:(id)obj {
+    return [self.facesForObject objectForKey:obj];
+}
+
+// hack version until obj to obj dictionary works
 - (void)setFace:(BBFace *)face forString:(NSString *)key {
     [self.locationsForObjects setValue:face forKey:key];
 }
