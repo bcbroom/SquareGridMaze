@@ -49,14 +49,11 @@
     [self addChild:self.gridSprite];
     
     self.goal = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
-    //[self.grid setFace:[self.grid faceForColumn:self.grid.width - 1 andRow:self.grid.height - 1] forString:@"goal"];
     self.goal.position = [self.gridController pointForFaceCenter:[self.grid faceForString:@"goal"]];
     self.goal.zPosition = 1;
     [self addChild:self.goal];
     
     self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
-    //[self.grid setFace:[self.grid faceForColumn:0 andRow:0] forString:@"player"];
-    //[self updatePlayerPosition];
     self.player.zPosition = 1;
     [self addChild:self.player];
     
