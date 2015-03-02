@@ -24,7 +24,7 @@
 
 @implementation BBSquareGridController
 
-- (instancetype)initWithGrid:(BBSquareGrid *)grid width:(NSInteger)width height:(NSInteger)height {
+- (instancetype)initWithGrid:(BBSquareGrid *)grid {
     self  = [super init];
     if (self) {
         _grid = grid;
@@ -32,8 +32,6 @@
         _faceWidth = 60;
         _padding = 10;
     }
-    
-
     
     return self;
 }
@@ -78,7 +76,8 @@
     for (BBEdge *edge in [self.grid allEdges]) {
         if (edge.isWall) {
             [[UIColor blackColor] setStroke];
-            CGContextSetLineWidth(ctx, 2.0);
+            CGContextSetLineWidth(ctx, 4.0);
+            CGContextSetLineCap(ctx, kCGLineCapRound);
         } else {
             [[UIColor whiteColor] setStroke];
             CGContextSetLineWidth(ctx, 1.0);

@@ -22,9 +22,8 @@
 @property (assign, nonatomic) NSInteger faceWidth;
 @property (assign, nonatomic) NSInteger faceHeight;
 @property (assign, nonatomic) NSInteger padding;
-@property (strong, nonatomic) SKSpriteNode *player;
 
-- (instancetype)initWithGrid:(BBSquareGrid *)grid width:(NSInteger)width height:(NSInteger)height;
+- (instancetype)initWithGrid:(BBSquareGrid *)grid;
 
 - (UIImage *)renderGrid;
 

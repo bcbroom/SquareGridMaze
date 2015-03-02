@@ -62,38 +62,30 @@
     XCTAssertEqualObjects(face, [self.grid faceForKey:key]);
 }
 
-- (void)testFaceForString {
-    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-    [self.grid setFace:face forString:@"object"];
-    
-    XCTAssertEqualObjects(face, [self.grid faceForString:@"object"]);
-}
+//- (void)testFaceForString {
+//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+//    [self.grid setFace:face forString:@"object"];
+//    
+//    XCTAssertEqualObjects(face, [self.grid faceForString:@"object"]);
+//}
 
-- (void)testUpdateFaceForString {
-    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-    [self.grid setFace:face forString:@"object"];
-    BBFace *updateFace = [self.grid faceForColumn:2 andRow:2];
-    [self.grid setFace:updateFace forString:@"object"];
-    
-    XCTAssertEqualObjects(updateFace, [self.grid faceForString:@"object"]);
-}
+//- (void)testUpdateFaceForString {
+//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+//    [self.grid setFace:face forString:@"object"];
+//    BBFace *updateFace = [self.grid faceForColumn:2 andRow:2];
+//    [self.grid setFace:updateFace forString:@"object"];
+//    
+//    XCTAssertEqualObjects(updateFace, [self.grid faceForString:@"object"]);
+//}
 
-- (void)testRemoveFaceForString {
-    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-    [self.grid setFace:face forString:@"object"];
-    [self.grid removeFaceForString:@"object"];
-    
-    XCTAssertNil([self.grid faceForString:@"object"]);
-}
+//- (void)testRemoveFaceForString {
+//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
+//    [self.grid setFace:face forString:@"object"];
+//    [self.grid removeFaceForString:@"object"];
+//    
+//    XCTAssertNil([self.grid faceForString:@"object"]);
+//}
 
-- (void)testFaceForObject {
-    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-    NSNumber *object = [NSNumber numberWithDouble:3.14];
-    
-    [self.grid setFace:face forObject:object];
-    BBFace *result = [self.grid faceForObject:object];
-    
-    XCTAssertEqualObjects(face, result);
-}
+
 
 @end

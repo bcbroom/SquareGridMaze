@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSMutableDictionary *faces;
 @property (strong, nonatomic) NSMutableDictionary *edges;
 @property (strong, nonatomic) NSMutableDictionary *vertices;
-@property (strong, nonatomic) NSMutableDictionary *locationsForObjects;
+//@property (strong, nonatomic) NSMutableDictionary *locationsForObjects;
 @property (strong, nonatomic) NSMapTable *facesForObject;
 
 @end
@@ -54,8 +54,8 @@
     
     _vertices = [NSMutableDictionary new];
     
-    _locationsForObjects = [NSMutableDictionary new];
-    _facesForObject = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableWeakMemory];
+    //_locationsForObjects = [NSMutableDictionary new];
+    self.facesForObject = [NSMapTable strongToStrongObjectsMapTable];
 }
 
 #pragma mark Faces
@@ -313,33 +313,42 @@
 // This part is not working, using objects for the key copies the obj, so it has a different address
 
 - (void)setFace:(BBFace *)face forObject:(id)obj {
-    [self.facesForObject setObject:face forKey:obj];
+    if (!face) {
+        NSLog(@"Warning - face value is nil");
+    }
+    [self.facesForObject setObject:face forKey:[NSNumber numberWithInteger:(NSInteger)obj]];
 }
 
 - (BBFace *)faceForObject:(id)obj {
-    return [self.facesForObject objectForKey:obj];
+    id facePtr = [self.facesForObject objectForKey:[NSNumber numberWithInteger:(NSInteger)obj]];
+    BBFace *face = (BBFace *)facePtr;
+    return face;
 }
 
 - (void)removeFaceForObject:(id)obj {
-    [self.facesForObject removeObjectForKey:obj];
+    [self.facesForObject removeObjectForKey:[NSNumber numberWithInteger:(NSInteger)obj]];
 }
 
 - (NSArray *)allObjectsInGrid {
     return [[self.facesForObject keyEnumerator] allObjects];
 }
 
+- (NSArray *)allFacesInGrid {
+    return [[self.facesForObject objectEnumerator] allObjects];
+}
+
 // hack version until obj to obj dictionary works
-- (void)setFace:(BBFace *)face forString:(NSString *)key {
-    [self.locationsForObjects setValue:face forKey:key];
-}
-
-- (BBFace *)faceForString:(NSString *)key {
-    return (BBFace *)[self.locationsForObjects valueForKey:key];
-}
-
-- (void)removeFaceForString:(NSString *)key {
-    [self.locationsForObjects removeObjectForKey:key];
-}
+//- (void)setFace:(BBFace *)face forString:(NSString *)key {
+//    [self.locationsForObjects setValue:face forKey:key];
+//}
+//
+//- (BBFace *)faceForString:(NSString *)key {
+//    return (BBFace *)[self.locationsForObjects valueForKey:key];
+//}
+//
+//- (void)removeFaceForString:(NSString *)key {
+//    [self.locationsForObjects removeObjectForKey:key];
+//}
 
 - (BBFace *)faceForKey:(NSString *)key {
     // assert that string starts with Face

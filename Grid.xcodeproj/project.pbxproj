@@ -26,6 +26,7 @@
 		D3A69C901A9F6A3400601E52 /* GridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C8F1A9F6A3400601E52 /* GridTests.m */; };
 		D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C911A9F76B600601E52 /* GridDirectionTests.m */; };
 		D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C931A9FA2A200601E52 /* VertexTests.m */; };
+		D3A69CFF1AA2150000601E52 /* GridStorageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69CFE1AA2150000601E52 /* GridStorageTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		D3A69C8F1A9F6A3400601E52 /* GridTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridTests.m; sourceTree = "<group>"; };
 		D3A69C911A9F76B600601E52 /* GridDirectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridDirectionTests.m; sourceTree = "<group>"; };
 		D3A69C931A9FA2A200601E52 /* VertexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexTests.m; sourceTree = "<group>"; };
+		D3A69CFE1AA2150000601E52 /* GridStorageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridStorageTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				D3A69C8F1A9F6A3400601E52 /* GridTests.m */,
+				D3A69CFE1AA2150000601E52 /* GridStorageTests.m */,
 				D3A69C911A9F76B600601E52 /* GridDirectionTests.m */,
 				D37F1FB91A8D993D00952ADF /* FaceTests.m */,
 				D37F1FD31A8EDC6000952ADF /* EdgeTests.m */,
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */,
+				D3A69CFF1AA2150000601E52 /* GridStorageTests.m in Sources */,
 				D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */,
 				D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */,
 				D37F1FBA1A8D993D00952ADF /* FaceTests.m in Sources */,
@@ -414,6 +418,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Grid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -424,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Grid/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -14,14 +14,14 @@
 
 @interface GameScene ()
 
+@property (strong, nonatomic) BBSquareGrid *grid;
 @property (strong, nonatomic) BBSquareGridController *gridController;
 @property (strong, nonatomic) SKSpriteNode *gridSprite;
+
 @property (strong, nonatomic) UISwipeGestureRecognizer *upSwipeRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *downSwipeRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *rightSwipeRecognizer;
 @property (strong, nonatomic) UISwipeGestureRecognizer *leftSwipeRecognizer;
-
-@property (strong, nonatomic) BBSquareGrid *grid;
 
 @property (strong, nonatomic) SKSpriteNode *player;
 @property (strong, nonatomic) SKSpriteNode *goal;
@@ -34,7 +34,7 @@
     NSLog(@"scene size is (%f,%f)", self.size.width, self.size.height);
     
     self.grid = [[BBSquareGrid alloc] initWithWidth:5 andHeight:9];
-    self.gridController = [[BBSquareGridController alloc] initWithGrid:self.grid width:5 height:9];
+    self.gridController = [[BBSquareGridController alloc] initWithGrid:self.grid];
     
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
@@ -49,7 +49,6 @@
     [self addChild:self.gridSprite];
     
     self.goal = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
-    self.goal.position = [self.gridController pointForFaceCenter:[self.grid faceForString:@"goal"]];
     self.goal.zPosition = 1;
     [self addChild:self.goal];
     
@@ -77,7 +76,7 @@
 }
 
 - (void)updatePlayerPosition {
-    BBFace *face = [self.grid faceForString:@"player"];
+    BBFace *face = [self.grid faceForObject:self.player];
     CGPoint newPosition = [self.gridController pointForFaceCenter:face];
     SKAction *animateMove = [SKAction moveTo:newPosition duration:0.25];
     
@@ -87,8 +86,8 @@
 }
 
 - (void)checkSolved {
-    BBFace *playerFace = [self.grid faceForString:@"player"];
-    BBFace *goalFace = [self.grid faceForString:@"goal"];
+    BBFace *playerFace = [self.grid faceForObject:self.player];
+    BBFace *goalFace = [self.grid faceForObject:self.goal];
     
     if (playerFace == goalFace) {
         [(GameScene *)self.player.scene youWin];
@@ -113,9 +112,6 @@
 }
 
 - (void)resetMaze {
-    [self.grid setFace:[self.grid faceForColumn:0 andRow:0] forString:@"player"];
-    [self updatePlayerPosition];
-    
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
     
@@ -157,9 +153,13 @@
             break;
     }
     self.goal.position = [self.gridController pointForFaceCenter:goalFace];
-    [self.grid setFace:goalFace forString:@"goal"];
+    [self.grid setFace:goalFace forObject:self.goal];
     
-    [self.grid setFace:startFace forString:@"player"];
+    if (!startFace) {
+        NSLog(@"Starting face is nil");
+    }
+    
+    [self.grid setFace:startFace forObject:self.player];
     [self updatePlayerPosition];
 }
 
@@ -168,7 +168,9 @@
 - (void)playerMove:(BBSquareGridDirection)direction {
     CGPoint bounceDist = [self.gridController centerToWallDistance];
     bounceDist = CGPointMake(bounceDist.x - self.player.size.width/2, bounceDist.y - self.player.size.height/2);
-    BBFace *playerFace = [self.grid faceForString:@"player"];
+    
+    BBFace *playerFace = [self.grid faceForObject:self.player];
+    
     SKAction *moveToWall;
     BBFace *targetFace;
     BBEdge *passThroughEdge;
@@ -209,7 +211,7 @@
         return;
     }
     
-    [self.grid setFace:targetFace forString:@"player"];
+    [self.grid setFace:targetFace forObject:self.player];
     [self updatePlayerPosition];    
 }
 
