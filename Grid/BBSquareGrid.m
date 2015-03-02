@@ -249,62 +249,77 @@
 }
 
 - (NSArray *)bordersForFace:(BBFace *)face {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBVertex *)cornerForFace:(BBFace *)face inDirection:(BBSquareGridDiagonalDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBVertex new];
 }
 
 - (NSArray *)cornersForFace:(BBFace *)face {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBFace *)faceJoinedByEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBFace new];
 }
 
 - (NSArray *)facesJoinedByEdge:(BBEdge *)edge {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBEdge *)edgeContinuingEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBEdge new];
 }
 
 - (NSArray *)edgesContinuingEdge:(BBEdge *)edge {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBVertex *)endpointForEdge:(BBEdge *)edge inDirection:(BBSquareGridDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBVertex new];
 }
 
 - (NSArray *)endpointsForEdge:(BBEdge *)edge {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBFace *)faceTouchesVertex:(BBVertex *)vertex inDirection:(BBSquareGridDiagonalDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBFace new];
 }
 
 - (NSArray *)facesTouchingVertex:(BBVertex *)vertex {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBEdge *)edgeProtrudesFromVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBEdge new];
 }
 
 - (NSArray *)edgesProtrudingFromVertex:(BBVertex *)vertex {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
 - (BBVertex *)vertexAdjacentToVertex:(BBVertex *)vertex inDirection:(BBSquareGridDirection)direction {
+    NSAssert(false, @"Method not implemented yet");
     return [BBVertex new];
 }
 
 - (NSArray *)verticesAdjacentToVertex:(BBVertex *)vertex {
+    NSAssert(false, @"Method not implemented yet");
     return [NSArray new];
 }
 
@@ -362,7 +377,7 @@
     NSUInteger keyLength = key.length;
     NSUInteger firstMarkerLocation = [key rangeOfString:@"::"].location;
     NSRange secondRange = NSMakeRange(firstMarkerLocation + 2, keyLength - firstMarkerLocation - 2);
-    //NSString *secondKeyString = [key substringWithRange:secondRange];
+
     NSUInteger secondMarkerLocation = [key rangeOfString:@"::" options:NSLiteralSearch range:secondRange].location;
     
     if (firstMarkerLocation == NSNotFound) {
