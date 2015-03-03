@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class BBSquareGrid;
+@class SKSpriteNode;
 
 @interface BBEdge : NSObject
 
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSInteger column;
 @property (copy, nonatomic) NSString *side;
+@property (strong, nonatomic) SKSpriteNode *sprite;
 
 @property (weak, nonatomic) BBSquareGrid *grid;
 

@@ -11,11 +11,13 @@
 @class BBEdge;
 @class BBVertex;
 @class BBSquareGrid;
+@class SKSpriteNode;
 
 @interface BBFace : NSObject
 
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSInteger column;
+@property (strong, nonatomic) SKSpriteNode *sprite;
 
 @property (weak, nonatomic) BBSquareGrid *grid;
 
