@@ -136,12 +136,14 @@
     // add top edges, which are S edges for the face just beyond grid edge
     for (int i = 0; i < _width; i++) {
         BBEdge *topEdge = [BBEdge edgeWithColumn:i andRow:_height andSide:@"S"];
+        topEdge.grid = self;
         [self.edges setObject:topEdge forKey:topEdge.key];
     }
     
     // add right edges, similarly, but these are W edges
     for (int j = 0; j < _height; j++) {
         BBEdge *rightEdge = [BBEdge edgeWithColumn:_width andRow:j andSide:@"W"];
+        rightEdge.grid = self;
         [self.edges setObject:rightEdge forKey:rightEdge.key];
     }
 }
@@ -249,8 +251,14 @@
 }
 
 - (NSArray *)bordersForFace:(BBFace *)face {
-    NSAssert(false, @"Method not implemented yet");
-    return [NSArray new];
+    NSMutableArray *borders = [NSMutableArray new];
+    
+    [borders addObject:[self edgeForColumn:face.column andRow:face.row andSide:@"W"]];
+    [borders addObject:[self edgeForColumn:face.column andRow:face.row andSide:@"S"]];
+    [borders addObject:[self edgeForColumn:face.column+1 andRow:face.row andSide:@"W"]];
+    [borders addObject:[self edgeForColumn:face.column andRow:face.row+1 andSide:@"S"]];
+    
+    return [borders copy];
 }
 
 - (BBVertex *)cornerForFace:(BBFace *)face inDirection:(BBSquareGridDiagonalDirection)direction {
@@ -289,8 +297,25 @@
 }
 
 - (NSArray *)endpointsForEdge:(BBEdge *)edge {
-    NSAssert(false, @"Method not implemented yet");
-    return [NSArray new];
+    NSMutableArray *verts = [NSMutableArray new];
+    
+//    NSAssert([edge.grid isEqual:self], @"Edge is not a member of this grid");
+    
+    if ([edge.side isEqualToString:@"S"]) {
+        [verts addObject:[self vertexForColumn:edge.column andRow:edge.row]];
+        [verts addObject:[self vertexForColumn:edge.column + 1 andRow:edge.row]];
+        return [verts copy];
+    }
+    
+    if ([edge.side isEqualToString:@"W"]) {
+        [verts addObject:[self vertexForColumn:edge.column andRow:edge.row]];
+        [verts addObject:[self vertexForColumn:edge.column andRow:edge.row + 1]];
+        return [verts copy];
+    }
+    
+//    NSAssert(NO, @"Edge object contains invalid side designation");
+    return nil;
+    
 }
 
 - (BBFace *)faceTouchesVertex:(BBVertex *)vertex inDirection:(BBSquareGridDiagonalDirection)direction {

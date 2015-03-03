@@ -25,7 +25,7 @@
 
 - (instancetype)initWithGrid:(BBSquareGrid *)grid;
 
-- (UIImage *)renderGrid;
+- (UIImage *)renderGridAsImage;
 
 - (CGPoint)pointForFaceCenter:(BBFace *)face;
 
