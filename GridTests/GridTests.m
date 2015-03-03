@@ -47,13 +47,18 @@
     XCTAssertNil([self.grid faceForColumn:0 andRow:-1]);
 }
 
-- (void)testCountAllFaces {
-    NSArray *faces = [self.grid allFaces];
-    XCTAssertEqual(faces.count, 12);
+- (void)testAllFaceCount {
+    XCTAssertEqual([self.grid allFaces].count, self.grid.height * self.grid.width);
 }
 
-- (void)testAllEdgesCount {
-    XCTAssertEqual(self.grid.allEdges.count, 31);
+- (void)testAllEdgeCount {
+    NSInteger numEdges = self.grid.width * self.grid.height * 2 + self.grid.height + self.grid.width;
+    XCTAssertEqual([[self.grid allEdges] count], numEdges);
+}
+
+- (void)testAllVertexCount {
+    NSInteger numVerts = self.grid.width * self.grid.height + self.grid.height + self.grid.width + 1;
+    XCTAssertEqual([[self.grid allVertices] count], numVerts);
 }
 
 - (void)testFaceForKey {
@@ -62,30 +67,20 @@
     XCTAssertEqualObjects(face, [self.grid faceForKey:key]);
 }
 
-//- (void)testFaceForString {
-//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-//    [self.grid setFace:face forString:@"object"];
-//    
-//    XCTAssertEqualObjects(face, [self.grid faceForString:@"object"]);
-//}
+- (void)testVerticesForSEdge {
+    BBEdge *edge = [self.grid edgeForColumn:2 andRow:1 andSide:@"S"];
+    NSArray *verts = [self.grid endpointsForEdge:edge];
+    XCTAssertEqual(verts.count, 2);
+    XCTAssert([verts containsObject:[self.grid vertexForColumn:edge.column andRow:edge.row]]);
+    XCTAssert([verts containsObject:[self.grid vertexForColumn:edge.column + 1 andRow:edge.row]]);
+}
 
-//- (void)testUpdateFaceForString {
-//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-//    [self.grid setFace:face forString:@"object"];
-//    BBFace *updateFace = [self.grid faceForColumn:2 andRow:2];
-//    [self.grid setFace:updateFace forString:@"object"];
-//    
-//    XCTAssertEqualObjects(updateFace, [self.grid faceForString:@"object"]);
-//}
-
-//- (void)testRemoveFaceForString {
-//    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-//    [self.grid setFace:face forString:@"object"];
-//    [self.grid removeFaceForString:@"object"];
-//    
-//    XCTAssertNil([self.grid faceForString:@"object"]);
-//}
-
-
+- (void)testVerticesForWEdge {
+    BBEdge *edge = [self.grid edgeForColumn:2 andRow:1 andSide:@"W"];
+    NSArray *verts = [self.grid endpointsForEdge:edge];
+    XCTAssertEqual(verts.count, 2);
+    XCTAssert([verts containsObject:[self.grid vertexForColumn:edge.column andRow:edge.row]]);
+    XCTAssert([verts containsObject:[self.grid vertexForColumn:edge.column andRow:edge.row + 1]]);
+}
 
 @end

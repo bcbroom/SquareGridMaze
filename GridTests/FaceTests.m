@@ -40,6 +40,8 @@
     XCTAssertEqual(1, face.row);
 }
 
+
+
 - (void)testCentralFaceNeighborCount {
     BBFace *face = [self.grid faceForColumn:1 andRow:1];
     NSArray *neighbors = face.neighbors;
@@ -95,8 +97,9 @@
 }
 
 - (void)testFaceBackpointerToGrid {
-    BBFace *face = [self.grid faceForColumn:2 andRow:1];
-    XCTAssertEqualObjects(self.grid, face.grid);
+    for (BBFace *face in [self.grid allFaces]) {
+        XCTAssertEqualObjects(self.grid, face.grid);
+    }
 }
 
 @end

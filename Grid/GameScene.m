@@ -39,7 +39,7 @@
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
     
-    UIImage *gridImage = [self.gridController renderGrid];
+    UIImage *gridImage = [self.gridController renderGridAsImage];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
     self.gridSprite = [SKSpriteNode spriteNodeWithTexture:gridTexture];
     
@@ -115,7 +115,7 @@
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
     
-    UIImage *gridImage = [self.gridController renderGrid];
+    UIImage *gridImage = [self.gridController renderGridAsImage];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
     self.gridSprite.texture = gridTexture;
     

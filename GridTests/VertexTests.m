@@ -45,4 +45,9 @@
     XCTAssertEqualObjects(key, @"Vertex::2::1");
 }
 
+- (void)testFaceBackpointerToGrid {
+    for (BBVertex *vert in [self.grid allVertices]) {
+        XCTAssertEqualObjects(self.grid, vert.grid);
+    }
+}
 @end

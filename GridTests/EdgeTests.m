@@ -31,8 +31,6 @@
     [super tearDown];
 }
 
-
-
 - (void)testCentralFaceEdgeCount {
     BBFace *face = [self.grid faceForColumn:1 andRow:1];
     XCTAssertEqual(face.edges.count, 4);
@@ -62,6 +60,14 @@
     BBEdge *edge = [self.grid edgeForColumn:2 andRow:1 andSide:@"W"];
     XCTAssertEqualObjects(edge.key, @"Edge::2::1::W");
 }
+
+- (void)testFaceBackpointerToGrid {
+    for (BBEdge *edge in [self.grid allEdges]) {
+        XCTAssertEqualObjects(self.grid, edge.grid);
+    }
+}
+
+
 
 
 
