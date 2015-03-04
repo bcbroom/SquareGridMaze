@@ -1,18 +1,18 @@
 //
-//  GameScene.m
+//  SpriteMazeScene.m
 //  Grid
 //
-//  Created by Brian Broom on 2/12/15.
+//  Created by Brian Broom on 3/4/15.
 //  Copyright (c) 2015 Brian Broom. All rights reserved.
 //
 
-#import "ImageMazeScene.h"
+#import "SpriteMazeScene.h"
 #import "BBSquareGridController.h"
 
 #import "BBSquareGrid.h"
 #import "BinaryTreeMazeGenerator.h"
 
-@interface ImageMazeScene ()
+@interface SpriteMazeScene ()
 
 @property (strong, nonatomic) BBSquareGrid *grid;
 @property (strong, nonatomic) BBSquareGridController *gridController;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation ImageMazeScene
+@implementation SpriteMazeScene
 
 -(void)didMoveToView:(SKView *)view {
     NSLog(@"scene size is (%f,%f)", self.size.width, self.size.height);
@@ -55,7 +55,12 @@
     self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
     self.player.zPosition = 2;
     [self addChild:self.player];
-
+    
+    SKSpriteNode *spriteMaze = [self.gridController renderAsSpriteNode];
+    spriteMaze.position = CGPointMake(0, 0);
+    spriteMaze.zPosition = 1;
+    [self addChild:spriteMaze];
+    
     [self setStartAndGoal];
     
     self.upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveNorth)];
@@ -206,13 +211,16 @@
     }
     
     if (!targetFace || passThroughEdge.isWall) {
+        SKAction *colorize = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.2];
+        SKAction *back = [SKAction colorizeWithColor:[UIColor blackColor] colorBlendFactor:1.0 duration:0.2];
+        [passThroughEdge.sprite runAction:[SKAction sequence:@[colorize, back]]];
         [self.player runAction:[SKAction sequence:@[moveToWall, [moveToWall reversedAction]]] withKey:@"moving"];
         NSLog(@"Can't move");
         return;
     }
     
     [self.grid setFace:targetFace forObject:self.player];
-    [self updatePlayerPosition];    
+    [self updatePlayerPosition];
 }
 
 - (void)playerMoveNorth {

@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "ImageMazeScene.h"
+#import "SpriteMazeScene.h"
 
 @implementation SKScene (Unarchive)
 
@@ -43,7 +44,11 @@
     
     // Create and configure the scene.
     //GameScene *scene = [GameScene unarchiveFromFile:@"GameScene"];
-    ImageMazeScene *scene = [[ImageMazeScene alloc] initWithSize:skView.frame.size];
+    
+    //ImageMazeScene *scene = [[ImageMazeScene alloc] initWithSize:skView.frame.size];
+    //scene.scaleMode = SKSceneScaleModeAspectFill;
+
+    SpriteMazeScene *scene = [[SpriteMazeScene alloc] initWithSize:skView.frame.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.

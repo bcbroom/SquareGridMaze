@@ -23,6 +23,7 @@
 		D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FCE1A8D99AC00952ADF /* BBVertex.m */; };
 		D37F1FD21A8E356800952ADF /* BBSquareGridController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD11A8E356800952ADF /* BBSquareGridController.m */; };
 		D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD31A8EDC6000952ADF /* EdgeTests.m */; };
+		D3A67C0A1AA74580004467FE /* SpriteMazeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C091AA74580004467FE /* SpriteMazeScene.m */; };
 		D3A69C901A9F6A3400601E52 /* GridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C8F1A9F6A3400601E52 /* GridTests.m */; };
 		D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C911A9F76B600601E52 /* GridDirectionTests.m */; };
 		D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C931A9FA2A200601E52 /* VertexTests.m */; };
@@ -69,6 +70,8 @@
 		D37F1FD01A8E356800952ADF /* BBSquareGridController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSquareGridController.h; sourceTree = "<group>"; };
 		D37F1FD11A8E356800952ADF /* BBSquareGridController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSquareGridController.m; sourceTree = "<group>"; };
 		D37F1FD31A8EDC6000952ADF /* EdgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdgeTests.m; sourceTree = "<group>"; };
+		D3A67C081AA74580004467FE /* SpriteMazeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteMazeScene.h; sourceTree = "<group>"; };
+		D3A67C091AA74580004467FE /* SpriteMazeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteMazeScene.m; sourceTree = "<group>"; };
 		D3A69C8F1A9F6A3400601E52 /* GridTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridTests.m; sourceTree = "<group>"; };
 		D3A69C911A9F76B600601E52 /* GridDirectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridDirectionTests.m; sourceTree = "<group>"; };
 		D3A69C931A9FA2A200601E52 /* VertexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexTests.m; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 				D37F1F9D1A8D993D00952ADF /* AppDelegate.m */,
 				D37F1F9F1A8D993D00952ADF /* ImageMazeScene.h */,
 				D37F1FA01A8D993D00952ADF /* ImageMazeScene.m */,
+				D3A67C081AA74580004467FE /* SpriteMazeScene.h */,
+				D3A67C091AA74580004467FE /* SpriteMazeScene.m */,
 				D37F1FD01A8E356800952ADF /* BBSquareGridController.h */,
 				D37F1FD11A8E356800952ADF /* BBSquareGridController.m */,
 				D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */,
@@ -291,6 +296,7 @@
 				D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */,
 				D37F1F9B1A8D993D00952ADF /* main.m in Sources */,
 				D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */,
+				D3A67C0A1AA74580004467FE /* SpriteMazeScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
