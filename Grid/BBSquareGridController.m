@@ -45,6 +45,12 @@
         _drawNonWallEdges = YES;
         _drawFaceLabels = NO;
         _wallLineWidth = 4;
+        
+        // some configs will use random colors
+        // seed so that they are already setup
+        // may not be needed, but don't have to check
+        srand48(time(0));
+       
     }
     
     return self;
@@ -58,6 +64,8 @@
     return self.grid.width * self.faceWidth + 2 * self.padding;
 }
 
+#pragma mark Grid Geometry Conversions
+
 - (CGPoint)pointForFaceCenter:(BBFace *)face {
     return CGPointMake(face.column * self.faceWidth + self.faceWidth/2 + self.padding,
                        self.totalHeight - (face.row * self.faceHeight + self.faceHeight/2 + self.padding));
@@ -66,6 +74,21 @@
 - (CGPoint)pointForFaceCenterYReversed:(BBFace *)face {
     return CGPointMake(face.column * self.faceWidth + self.faceWidth/2 + self.padding,
                        face.row * self.faceHeight + self.faceHeight/2 + self.padding);
+}
+
+- (CGPoint)pointForEdgeCenterYReversed:(BBEdge *)edge {
+    if ([edge.side isEqualToString:@"S"]) {
+    return CGPointMake(edge.column * self.faceWidth + self.faceWidth/2 + self.padding,
+                       edge.row * self.faceHeight + self.padding);
+    }
+    
+    if ([edge.side isEqualToString:@"W"]) {
+        return CGPointMake(edge.column * self.faceWidth + self.padding,
+                           edge.row * self.faceHeight + self.faceHeight/2 + self.padding);
+    }
+    
+    NSAssert(NO, @"Error - Invalid side designation for Edge");
+    return CGPointZero;
 }
 
 - (CGRect)rectForFace:(BBFace *)face {
@@ -82,19 +105,23 @@
     return CGPointMake((self.faceWidth)/2, (self.faceHeight)/2);
 }
 
+#pragma mark Grid Image Render
+
 - (void)drawBackgroundLayer:(CGContextRef)ctx {
-    [[UIColor lightGrayColor] setFill];
+    if (self.bgColor) {
+        [self.bgColor setFill];
+    } else {
+        [[UIColor lightGrayColor] setFill];
+    }
     CGContextFillRect(ctx, CGRectMake(0, 0, self.totalWidth, self.totalHeight));
 }
 
--(void)randomFillColor {
-    [[UIColor colorWithHue:drand48() saturation:0.2 brightness:0.8 alpha:1.0] setFill];
+-(UIColor *)randomFillColor {
+    return [UIColor colorWithHue:drand48() saturation:0.2 brightness:0.8 alpha:1.0];
 }
 
 - (void)drawGridFaces:(CGContextRef)ctx {
-    if (self.randomFaceColors) {
-        srand48(time(0));
-    }
+
     
     if (!self.faceColor) {
         [[UIColor whiteColor] setFill];
@@ -103,10 +130,14 @@
     }
     
     for (BBFace *face in [self.grid allFaces]) {
-        if (self.randomFaceColors) { [self randomFillColor]; }
+        if (self.randomFaceColors) { [[self randomFillColor] setFill]; }
         CGContextFillRect(ctx, [self rectForFace:face]);
     }
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+// this is only a diagnostic method, leaving it in for now
 
 - (void)drawFaceLabels:(CGContextRef)ctx {
     if (!self.drawFaceLabels) { return; }
@@ -119,6 +150,8 @@
                                                                             withFont:[UIFont systemFontOfSize:14.0]];
     }
 }
+
+#pragma clang diagnostic pop
 
 - (void)drawEdgesNotWalls:(CGContextRef)ctx {
     NSPredicate *notAWall = [NSPredicate predicateWithFormat:@"wall == NO"];
@@ -186,6 +219,44 @@
     UIGraphicsEndImageContext();
     
     return textureImage;
+}
+
+#pragma mark Grid Sprite Rendering
+
+- (SKNode *)renderAsSpriteNode {
+    UIColor *bgColor = self.bgColor ? self.bgColor : [UIColor lightGrayColor];
+    SKSpriteNode *bgNode = [SKSpriteNode spriteNodeWithColor:bgColor size:CGSizeMake(self.totalWidth, self.totalHeight)];
+    //bgNode.alpha = 0.7;
+    bgNode.anchorPoint = CGPointMake(0, 0);
+    
+    for (BBFace *face in [self.grid allFaces]) {
+        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[self randomFillColor] size:CGSizeMake(self.faceWidth, self.faceHeight)];
+        face.sprite = sprite;
+        sprite.position = [self pointForFaceCenterYReversed:face];
+        [bgNode addChild:sprite];
+        
+    }
+    
+    for (BBEdge *edge in [self.grid allEdges]) {
+        if ([edge.side isEqualToString:@"S"]) {
+            if (!edge.isWall) { continue; }
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(self.faceWidth, 4)];
+            edge.sprite = sprite;
+            sprite.position = [self pointForEdgeCenterYReversed:edge];
+            [bgNode addChild:sprite];
+        }
+        
+        if ([edge.side isEqualToString:@"W"]) {
+            if (!edge.isWall) { continue; }
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithColor:[UIColor blackColor] size:CGSizeMake(4, self.faceHeight)];
+            edge.sprite = sprite;
+            sprite.position = [self pointForEdgeCenterYReversed:edge];
+            [bgNode addChild:sprite];
+        }
+    }
+    
+    
+    return bgNode;
 }
 
 #pragma mark Position Helpers

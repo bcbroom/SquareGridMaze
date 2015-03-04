@@ -26,8 +26,10 @@
 - (instancetype)initWithGrid:(BBSquareGrid *)grid;
 
 - (UIImage *)renderGridAsImage;
+- (SKSpriteNode *)renderAsSpriteNode;
 
 - (CGPoint)pointForFaceCenter:(BBFace *)face;
+- (CGPoint)pointForFaceCenterYReversed:(BBFace *)face;
 
 - (CGPoint)centerToWallDistance;
 

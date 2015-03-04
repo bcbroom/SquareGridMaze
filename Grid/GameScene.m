@@ -33,7 +33,7 @@
 -(void)didMoveToView:(SKView *)view {
     NSLog(@"scene size is (%f,%f)", self.size.width, self.size.height);
     
-    self.grid = [[BBSquareGrid alloc] initWithWidth:5 andHeight:9];
+    self.grid = [[BBSquareGrid alloc] initWithWidth:4 andHeight:8];
     self.gridController = [[BBSquareGridController alloc] initWithGrid:self.grid];
     
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
@@ -49,12 +49,17 @@
     [self addChild:self.gridSprite];
     
     self.goal = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
-    self.goal.zPosition = 1;
+    self.goal.zPosition = 2;
     [self addChild:self.goal];
     
     self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
-    self.player.zPosition = 1;
+    self.player.zPosition = 2;
     [self addChild:self.player];
+
+    SKSpriteNode *spriteMaze = [self.gridController renderAsSpriteNode];
+    spriteMaze.position = CGPointMake(0, 0);
+    spriteMaze.zPosition = 1;
+    [self addChild:spriteMaze];
     
     [self setStartAndGoal];
     
@@ -77,7 +82,7 @@
 
 - (void)updatePlayerPosition {
     BBFace *face = [self.grid faceForObject:self.player];
-    CGPoint newPosition = [self.gridController pointForFaceCenter:face];
+    CGPoint newPosition = [self.gridController pointForFaceCenterYReversed:face];
     SKAction *animateMove = [SKAction moveTo:newPosition duration:0.25];
     
     [self.player runAction:animateMove completion:^{
@@ -152,7 +157,7 @@
         default:
             break;
     }
-    self.goal.position = [self.gridController pointForFaceCenter:goalFace];
+    self.goal.position = [self.gridController pointForFaceCenterYReversed:goalFace];
     [self.grid setFace:goalFace forObject:self.goal];
     
     if (!startFace) {
@@ -206,6 +211,9 @@
     }
     
     if (!targetFace || passThroughEdge.isWall) {
+        SKAction *colorize = [SKAction colorizeWithColor:[UIColor redColor] colorBlendFactor:1.0 duration:0.2];
+        SKAction *back = [SKAction colorizeWithColor:[UIColor blackColor] colorBlendFactor:1.0 duration:0.2];
+        [passThroughEdge.sprite runAction:[SKAction sequence:@[colorize, back]]];
         [self.player runAction:[SKAction sequence:@[moveToWall, [moveToWall reversedAction]]] withKey:@"moving"];
         NSLog(@"Can't move");
         return;
