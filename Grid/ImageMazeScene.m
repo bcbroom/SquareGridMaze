@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Brian Broom. All rights reserved.
 //
 
-#import "GameScene.h"
+#import "ImageMazeScene.h"
 #import "BBSquareGridController.h"
 
 #import "BBSquareGrid.h"
 #import "BinaryTreeMazeGenerator.h"
 
-@interface GameScene ()
+@interface ImageMazeScene ()
 
 @property (strong, nonatomic) BBSquareGrid *grid;
 @property (strong, nonatomic) BBSquareGridController *gridController;
@@ -28,7 +28,7 @@
 
 @end
 
-@implementation GameScene
+@implementation ImageMazeScene
 
 -(void)didMoveToView:(SKView *)view {
     NSLog(@"scene size is (%f,%f)", self.size.width, self.size.height);
@@ -95,7 +95,7 @@
     BBFace *goalFace = [self.grid faceForObject:self.goal];
     
     if (playerFace == goalFace) {
-        [(GameScene *)self.player.scene youWin];
+        [self youWin];
     }
 }
 

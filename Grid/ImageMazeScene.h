@@ -8,7 +8,7 @@
 
 #import <SpriteKit/SpriteKit.h>
 
-@interface GameScene : SKScene
+@interface ImageMazeScene : SKScene
 
 - (void)youWin;
 

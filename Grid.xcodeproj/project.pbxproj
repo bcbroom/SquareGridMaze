@@ -10,7 +10,7 @@
 		D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */; };
 		D37F1F9B1A8D993D00952ADF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1F9A1A8D993D00952ADF /* main.m */; };
 		D37F1F9E1A8D993D00952ADF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1F9D1A8D993D00952ADF /* AppDelegate.m */; };
-		D37F1FA11A8D993D00952ADF /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FA01A8D993D00952ADF /* GameScene.m */; };
+		D37F1FA11A8D993D00952ADF /* ImageMazeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FA01A8D993D00952ADF /* ImageMazeScene.m */; };
 		D37F1FA31A8D993D00952ADF /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D37F1FA21A8D993D00952ADF /* GameScene.sks */; };
 		D37F1FA61A8D993D00952ADF /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FA51A8D993D00952ADF /* GameViewController.m */; };
 		D37F1FA91A8D993D00952ADF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D37F1FA71A8D993D00952ADF /* Main.storyboard */; };
@@ -47,8 +47,8 @@
 		D37F1F9A1A8D993D00952ADF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D37F1F9C1A8D993D00952ADF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D37F1F9D1A8D993D00952ADF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D37F1F9F1A8D993D00952ADF /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		D37F1FA01A8D993D00952ADF /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		D37F1F9F1A8D993D00952ADF /* ImageMazeScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageMazeScene.h; sourceTree = "<group>"; };
+		D37F1FA01A8D993D00952ADF /* ImageMazeScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageMazeScene.m; sourceTree = "<group>"; };
 		D37F1FA21A8D993D00952ADF /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		D37F1FA41A8D993D00952ADF /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		D37F1FA51A8D993D00952ADF /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 				D37F1FC31A8D996000952ADF /* Grid Model */,
 				D37F1F9C1A8D993D00952ADF /* AppDelegate.h */,
 				D37F1F9D1A8D993D00952ADF /* AppDelegate.m */,
-				D37F1F9F1A8D993D00952ADF /* GameScene.h */,
-				D37F1FA01A8D993D00952ADF /* GameScene.m */,
+				D37F1F9F1A8D993D00952ADF /* ImageMazeScene.h */,
+				D37F1FA01A8D993D00952ADF /* ImageMazeScene.m */,
 				D37F1FD01A8E356800952ADF /* BBSquareGridController.h */,
 				D37F1FD11A8E356800952ADF /* BBSquareGridController.m */,
 				D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */,
@@ -287,7 +287,7 @@
 				D37F1FA61A8D993D00952ADF /* GameViewController.m in Sources */,
 				D37F1FC61A8D998C00952ADF /* BBSquareGrid.m in Sources */,
 				D37F1F9E1A8D993D00952ADF /* AppDelegate.m in Sources */,
-				D37F1FA11A8D993D00952ADF /* GameScene.m in Sources */,
+				D37F1FA11A8D993D00952ADF /* ImageMazeScene.m in Sources */,
 				D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */,
 				D37F1F9B1A8D993D00952ADF /* main.m in Sources */,
 				D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */,
