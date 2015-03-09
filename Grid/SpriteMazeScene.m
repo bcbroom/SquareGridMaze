@@ -11,6 +11,9 @@
 
 #import "BBSquareGrid.h"
 #import "BinaryTreeMazeGenerator.h"
+#import "SidewinderMazeGenerator.h"
+
+#import "Dijkstra.h"
 
 @interface SpriteMazeScene ()
 
@@ -36,8 +39,11 @@
     self.grid = [[BBSquareGrid alloc] initWithWidth:4 andHeight:8];
     self.gridController = [[BBSquareGridController alloc] initWithGrid:self.grid];
     
-    BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
-    [btmg buildMazeOnGrid:self.grid];
+//    BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
+//    [btmg buildMazeOnGrid:self.grid];
+    
+    SidewinderMazeGenerator *swmg = [SidewinderMazeGenerator new];
+    [swmg buildMazeOnGrid:self.grid];
     
     UIImage *gridImage = [self.gridController renderGridAsImage];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
@@ -62,6 +68,9 @@
     [self addChild:spriteMaze];
     
     [self setStartAndGoal];
+    
+    Dijkstra *dij = [Dijkstra new];
+    [dij calculateSimpleDijkstraOnGrid:self.grid startFace:[self.grid faceForColumn:0 andRow:0]];
     
     self.upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveNorth)];
     self.upSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;

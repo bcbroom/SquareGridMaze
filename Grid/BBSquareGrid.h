@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, BBSquareGridDiagonalDirection) {
 - (BBVertex *)cornerForFace:(BBFace *)face inDirection:(BBSquareGridDiagonalDirection)direction;
 
 - (NSArray *)neighborsForFace:(BBFace *)face;
+- (NSArray *)connectedFacesForFace:(BBFace *)face;
 - (NSArray *)bordersForFace:(BBFace *)face;
 - (NSArray *)cornersForFace:(BBFace *)face;
 

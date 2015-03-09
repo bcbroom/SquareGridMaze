@@ -24,6 +24,10 @@
 		D37F1FD21A8E356800952ADF /* BBSquareGridController.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD11A8E356800952ADF /* BBSquareGridController.m */; };
 		D37F1FD41A8EDC6000952ADF /* EdgeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D37F1FD31A8EDC6000952ADF /* EdgeTests.m */; };
 		D3A67C0A1AA74580004467FE /* SpriteMazeScene.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C091AA74580004467FE /* SpriteMazeScene.m */; };
+		D3A67C0D1AA7530F004467FE /* BBSquareGridCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C0C1AA7530F004467FE /* BBSquareGridCalculator.m */; };
+		D3A67C101AA7531C004467FE /* BBSquareGridRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C0F1AA7531C004467FE /* BBSquareGridRenderer.m */; };
+		D3A67C131AA754B1004467FE /* SidewinderMazeGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C121AA754B1004467FE /* SidewinderMazeGenerator.m */; };
+		D3A67C161AA7B2D4004467FE /* Dijkstra.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A67C151AA7B2D4004467FE /* Dijkstra.m */; };
 		D3A69C901A9F6A3400601E52 /* GridTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C8F1A9F6A3400601E52 /* GridTests.m */; };
 		D3A69C921A9F76B600601E52 /* GridDirectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C911A9F76B600601E52 /* GridDirectionTests.m */; };
 		D3A69C941A9FA2A200601E52 /* VertexTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D3A69C931A9FA2A200601E52 /* VertexTests.m */; };
@@ -72,6 +76,14 @@
 		D37F1FD31A8EDC6000952ADF /* EdgeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EdgeTests.m; sourceTree = "<group>"; };
 		D3A67C081AA74580004467FE /* SpriteMazeScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteMazeScene.h; sourceTree = "<group>"; };
 		D3A67C091AA74580004467FE /* SpriteMazeScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteMazeScene.m; sourceTree = "<group>"; };
+		D3A67C0B1AA7530F004467FE /* BBSquareGridCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSquareGridCalculator.h; sourceTree = "<group>"; };
+		D3A67C0C1AA7530F004467FE /* BBSquareGridCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSquareGridCalculator.m; sourceTree = "<group>"; };
+		D3A67C0E1AA7531C004467FE /* BBSquareGridRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBSquareGridRenderer.h; sourceTree = "<group>"; };
+		D3A67C0F1AA7531C004467FE /* BBSquareGridRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BBSquareGridRenderer.m; sourceTree = "<group>"; };
+		D3A67C111AA754B1004467FE /* SidewinderMazeGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidewinderMazeGenerator.h; sourceTree = "<group>"; };
+		D3A67C121AA754B1004467FE /* SidewinderMazeGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidewinderMazeGenerator.m; sourceTree = "<group>"; };
+		D3A67C141AA7B2D4004467FE /* Dijkstra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dijkstra.h; sourceTree = "<group>"; };
+		D3A67C151AA7B2D4004467FE /* Dijkstra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Dijkstra.m; sourceTree = "<group>"; };
 		D3A69C8F1A9F6A3400601E52 /* GridTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridTests.m; sourceTree = "<group>"; };
 		D3A69C911A9F76B600601E52 /* GridDirectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridDirectionTests.m; sourceTree = "<group>"; };
 		D3A69C931A9FA2A200601E52 /* VertexTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexTests.m; sourceTree = "<group>"; };
@@ -124,10 +136,8 @@
 				D37F1FA01A8D993D00952ADF /* ImageMazeScene.m */,
 				D3A67C081AA74580004467FE /* SpriteMazeScene.h */,
 				D3A67C091AA74580004467FE /* SpriteMazeScene.m */,
-				D37F1FD01A8E356800952ADF /* BBSquareGridController.h */,
-				D37F1FD11A8E356800952ADF /* BBSquareGridController.m */,
-				D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */,
-				D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */,
+				D3A67C141AA7B2D4004467FE /* Dijkstra.h */,
+				D3A67C151AA7B2D4004467FE /* Dijkstra.m */,
 				D37F1FA21A8D993D00952ADF /* GameScene.sks */,
 				D37F1FA41A8D993D00952ADF /* GameViewController.h */,
 				D37F1FA51A8D993D00952ADF /* GameViewController.m */,
@@ -181,6 +191,16 @@
 				D37F1FCB1A8D99A400952ADF /* BBEdge.m */,
 				D37F1FCD1A8D99AC00952ADF /* BBVertex.h */,
 				D37F1FCE1A8D99AC00952ADF /* BBVertex.m */,
+				D37F1FD01A8E356800952ADF /* BBSquareGridController.h */,
+				D37F1FD11A8E356800952ADF /* BBSquareGridController.m */,
+				D3A67C0B1AA7530F004467FE /* BBSquareGridCalculator.h */,
+				D3A67C0C1AA7530F004467FE /* BBSquareGridCalculator.m */,
+				D3A67C0E1AA7531C004467FE /* BBSquareGridRenderer.h */,
+				D3A67C0F1AA7531C004467FE /* BBSquareGridRenderer.m */,
+				D30DD17E1A96206F00CB6525 /* BinaryTreeMazeGenerator.h */,
+				D30DD17F1A96206F00CB6525 /* BinaryTreeMazeGenerator.m */,
+				D3A67C111AA754B1004467FE /* SidewinderMazeGenerator.h */,
+				D3A67C121AA754B1004467FE /* SidewinderMazeGenerator.m */,
 			);
 			name = "Grid Model";
 			sourceTree = "<group>";
@@ -287,15 +307,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37F1FC91A8D999C00952ADF /* BBFace.m in Sources */,
+				D3A67C161AA7B2D4004467FE /* Dijkstra.m in Sources */,
 				D37F1FD21A8E356800952ADF /* BBSquareGridController.m in Sources */,
 				D37F1FCC1A8D99A400952ADF /* BBEdge.m in Sources */,
 				D37F1FA61A8D993D00952ADF /* GameViewController.m in Sources */,
 				D37F1FC61A8D998C00952ADF /* BBSquareGrid.m in Sources */,
 				D37F1F9E1A8D993D00952ADF /* AppDelegate.m in Sources */,
 				D37F1FA11A8D993D00952ADF /* ImageMazeScene.m in Sources */,
+				D3A67C101AA7531C004467FE /* BBSquareGridRenderer.m in Sources */,
 				D30DD1801A96206F00CB6525 /* BinaryTreeMazeGenerator.m in Sources */,
+				D3A67C0D1AA7530F004467FE /* BBSquareGridCalculator.m in Sources */,
 				D37F1F9B1A8D993D00952ADF /* main.m in Sources */,
 				D37F1FCF1A8D99AC00952ADF /* BBVertex.m in Sources */,
+				D3A67C131AA754B1004467FE /* SidewinderMazeGenerator.m in Sources */,
 				D3A67C0A1AA74580004467FE /* SpriteMazeScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

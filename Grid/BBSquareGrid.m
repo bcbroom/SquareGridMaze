@@ -220,7 +220,22 @@
 }
 
 - (NSArray *)neighborsForFace:(BBFace *)face {
+    NSAssert(NO, @"Method not implemented yet");
     return [NSArray new];
+}
+
+- (NSArray *)connectedFacesForFace:(BBFace *)face {
+    NSMutableArray *connectedFaces = [NSMutableArray new];
+    
+    // relies on helper settings for XXFace and XXEdge
+    // TODO: Generalize better
+    
+    if (!face.northEdge.isWall) { [connectedFaces addObject:face.northFace]; }
+    if (!face.eastEdge.isWall) { [connectedFaces addObject:face.eastFace]; }
+    if (!face.southEdge.isWall) { [connectedFaces addObject:face.southFace]; }
+    if (!face.westEdge.isWall) { [connectedFaces addObject:face.westFace]; }
+    
+    return [connectedFaces copy];
 }
 
 - (BBEdge *)borderForFace:(BBFace *)face inDirection:(BBSquareGridDirection)direction {

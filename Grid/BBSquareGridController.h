@@ -23,6 +23,8 @@
 @property (assign, nonatomic) NSInteger faceHeight;
 @property (assign, nonatomic) NSInteger padding;
 
+@property (strong, nonatomic) NSArray *path;
+
 - (instancetype)initWithGrid:(BBSquareGrid *)grid;
 
 - (UIImage *)renderGridAsImage;

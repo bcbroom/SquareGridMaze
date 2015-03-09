@@ -12,6 +12,8 @@
 #import "BBSquareGrid.h"
 #import "BinaryTreeMazeGenerator.h"
 
+#import "Dijkstra.h"
+
 @interface ImageMazeScene ()
 
 @property (strong, nonatomic) BBSquareGrid *grid;
@@ -39,6 +41,20 @@
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
     
+    self.goal = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
+    self.goal.zPosition = 2;
+    [self addChild:self.goal];
+    
+    self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
+    self.player.zPosition = 2;
+    [self addChild:self.player];
+    
+    [self setStartAndGoal];
+    
+    Dijkstra *dij = [Dijkstra new];
+    [dij calculateSimpleDijkstraOnGrid:self.grid startFace:[self.grid faceForObject:self.player]];
+    self.gridController.path = [dij solutionPathForGrid:self.grid startFace:[self.grid faceForObject:self.player] endFace:[self.grid faceForObject:self.goal]];
+    
     UIImage *gridImage = [self.gridController renderGridAsImage];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
     self.gridSprite = [SKSpriteNode spriteNodeWithTexture:gridTexture];
@@ -48,15 +64,7 @@
     self.gridSprite.position = CGPointMake(self.gridSprite.size.width/2, self.gridSprite.size.height/2);
     [self addChild:self.gridSprite];
     
-    self.goal = [SKSpriteNode spriteNodeWithColor:[UIColor blueColor] size:CGSizeMake(20, 20)];
-    self.goal.zPosition = 2;
-    [self addChild:self.goal];
-    
-    self.player = [SKSpriteNode spriteNodeWithColor:[UIColor redColor] size:CGSizeMake(30, 30)];
-    self.player.zPosition = 2;
-    [self addChild:self.player];
 
-    [self setStartAndGoal];
     
     self.upSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(playerMoveNorth)];
     self.upSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
@@ -115,11 +123,15 @@
     BinaryTreeMazeGenerator *btmg = [BinaryTreeMazeGenerator new];
     [btmg buildMazeOnGrid:self.grid];
     
+    [self setStartAndGoal];
+    
+    Dijkstra *dij = [Dijkstra new];
+    [dij calculateSimpleDijkstraOnGrid:self.grid startFace:[self.grid faceForObject:self.player]];
+    self.gridController.path = [dij solutionPathForGrid:self.grid startFace:[self.grid faceForObject:self.player] endFace:[self.grid faceForObject:self.goal]];
+    
     UIImage *gridImage = [self.gridController renderGridAsImage];
     SKTexture *gridTexture = [SKTexture textureWithImage:gridImage];
-    self.gridSprite.texture = gridTexture;
-    
-    [self setStartAndGoal];
+    self.gridSprite.texture = gridTexture;    
 }
 
 - (void)setStartAndGoal {

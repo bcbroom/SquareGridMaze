@@ -10,6 +10,8 @@
 #import "BBSquareGrid.h"
 #import "BinaryTreeMazeGenerator.h"
 
+#import "Dijkstra.h"
+
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
 
@@ -23,6 +25,7 @@
 @property (assign, nonatomic) BOOL randomFaceColors;
 @property (assign, nonatomic) BOOL drawNonWallEdges;
 @property (assign, nonatomic) BOOL drawFaceLabels;
+
 @property (strong, nonatomic) UIColor *bgColor;
 @property (strong, nonatomic) UIColor *faceColor;
 @property (strong, nonatomic) UIColor *edgeColor;
@@ -44,13 +47,14 @@
         _randomFaceColors = YES;
         _drawNonWallEdges = YES;
         _drawFaceLabels = NO;
+
         _wallLineWidth = 4;
         
         // some configs will use random colors
         // seed so that they are already setup
         // may not be needed, but don't have to check
         srand48(time(0));
-       
+        
     }
     
     return self;
@@ -122,15 +126,12 @@
 
 - (void)drawGridFaces:(CGContextRef)ctx {
 
-    
-    if (!self.faceColor) {
-        [[UIColor whiteColor] setFill];
-    } else {
-        [self.faceColor setFill];
-    }
+    [self.faceColor setFill];
+    if (!self.faceColor) { [[UIColor whiteColor] setFill]; }
     
     for (BBFace *face in [self.grid allFaces]) {
         if (self.randomFaceColors) { [[self randomFillColor] setFill]; }
+        if ([self.path containsObject:face]) { [[UIColor yellowColor] setFill]; }
         CGContextFillRect(ctx, [self rectForFace:face]);
     }
 }
@@ -140,14 +141,17 @@
 // this is only a diagnostic method, leaving it in for now
 
 - (void)drawFaceLabels:(CGContextRef)ctx {
-    if (!self.drawFaceLabels) { return; }
+    //if (!self.drawFaceLabels) { return; }
     
     [[UIColor blackColor] setFill];
     
     for (BBFace *face in [self.grid allFaces]) {
         CGPoint faceCenter = [self pointForFaceCenter:face];
-        [[NSString stringWithFormat:@"(%ld,%ld)", face.column, face.row] drawAtPoint:CGPointMake(faceCenter.x - 14, faceCenter.y - 7)
+//        [[NSString stringWithFormat:@"(%ld,%ld)", face.column, face.row] drawAtPoint:CGPointMake(faceCenter.x - 14, faceCenter.y - 7)
+//                                                                            withFont:[UIFont systemFontOfSize:14.0]];
+        [[NSString stringWithFormat:@"%ld", face.distance] drawAtPoint:CGPointMake(faceCenter.x - 14, faceCenter.y - 7)
                                                                             withFont:[UIFont systemFontOfSize:14.0]];
+        
     }
 }
 
@@ -205,6 +209,8 @@
     }
 }
 
+#pragma mark Grid Sprite Rendering
+
 - (UIImage *)renderGridAsImage {
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(self.totalWidth, self.totalHeight), YES, 0);
     CGContextRef ctx = UIGraphicsGetCurrentContext();
@@ -212,7 +218,7 @@
     [self drawBackgroundLayer:ctx];
     [self drawGridFaces:ctx];
     [self drawFaceLabels:ctx];
-    [self drawEdgesNotWalls:ctx];    
+    [self drawEdgesNotWalls:ctx];
     [self drawWallEdges:ctx];
     
     UIImage *textureImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -221,12 +227,10 @@
     return textureImage;
 }
 
-#pragma mark Grid Sprite Rendering
-
 - (SKNode *)renderAsSpriteNode {
     UIColor *bgColor = self.bgColor ? self.bgColor : [UIColor lightGrayColor];
     SKSpriteNode *bgNode = [SKSpriteNode spriteNodeWithColor:bgColor size:CGSizeMake(self.totalWidth, self.totalHeight)];
-    //bgNode.alpha = 0.7;
+    
     bgNode.anchorPoint = CGPointMake(0, 0);
     
     for (BBFace *face in [self.grid allFaces]) {
@@ -255,10 +259,11 @@
         }
     }
     
-    
     return bgNode;
 }
 
-#pragma mark Position Helpers
+
+
+
 
 @end

@@ -17,6 +17,10 @@
 
 @property (assign, nonatomic) NSInteger row;
 @property (assign, nonatomic) NSInteger column;
+
+@property (assign, nonatomic) bool visited;
+@property (assign, nonatomic) NSInteger distance;
+
 @property (strong, nonatomic) SKSpriteNode *sprite;
 
 @property (weak, nonatomic) BBSquareGrid *grid;
